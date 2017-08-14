@@ -1,49 +1,47 @@
 
-               ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
-               ³ Bresenham's Line and Circle Algorithms ³
-               ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+               -------------------------------------------
+               |  Bresenham's Line and Circle Algorithms | 
+               -------------------------------------------                  
 
                  Written for the PC-GPE by Mark Feldman
             e-mail address : u914097@student.canberra.edu.au
                              myndale@cairo.anu.edu.au
 
-             ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
-             ³      THIS FILE MAY NOT BE DISTRIBUTED     ³
-             ³ SEPARATE TO THE ENTIRE PC-GPE COLLECTION. ³
-             ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+             -----------------------------------------------
+             |      THIS FILE MAY NOT BE DISTRIBUTED       |
+             |  SEPARATE TO THE ENTIRE PC-GPE COLLECTION.  |
+             -----------------------------------------------
 
-
-ÚÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
-³ Disclaimer ³
-ÀÄÄÄÄÄÄÄÄÄÄÄÄÙ
+----------------
+|  Disclaimer  |
+----------------
 
 I assume no responsibility whatsoever for any effect that this file, the
 information contained therein or the use thereof has on you, your sanity,
 computer, spouse, children, pets or anything else related to you or your
 existance. No warranty is provided nor implied with this information.
 
-ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
-³ Introduction ³
-ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+------------------
+|  Introduction  |
+------------------
 
 Bresenham is a pretty smart cookie (note the use of the word "is", last I
 heard he was still working for IBM). This file contains the algorithms he
 developped for drawing lines and circles on a pixelated display system
 such as the VGA.
 
-ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
-³ Line Algorithm ³
-ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
+--------------------
+|  Line Algorithm  |
+--------------------
 The basic algorithm works for lines which look like this:
 
 
-      o-------                         ¿
-     p1       --------                 ³ deltay
-                      -------      p2  ³
-                             -------o  Ù
-
-      ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+      o-------                         |
+     p1       --------                 | deltay
+                      -------      p2  |
+                             -------o  |
+     -----------------------------------
                   deltax
 
 where p1 = (x1,y1),
@@ -83,9 +81,9 @@ x := x + 1;
 
 It's that simple!
 
-ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
-³ Speeding Up The Line Algorithm ³
-ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+------------------------------------
+|  Speeding Up The Line Algorithm  |
+------------------------------------
 
 There are several useful techniques for speeding up Bresenhams line
 algorithm.
@@ -120,9 +118,10 @@ profile of the example program at the end of this file showed that 40% of
 CPU time was spent in the slow PutPixel routine I was using, the loop
 mechanics and testing the sign of the decision variable.
 
-ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
-³ Other Uses for the Line Algorithm ³
-ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+---------------------------------------
+|  Other Uses for the Line Algorithm  |
+---------------------------------------
 
 A line can be represented by the equation y = mx + c, where
 m = deltay / deltax. Note that this is a version of the standard linear
@@ -142,9 +141,10 @@ stretching them out (or squashing them in) to a line of pixels on the screen.
 Typically you would draw a vertical line down the screen and use Bresenhams
 to calculate which bitmap pixel should be drawn at each screen pixel.
 
-ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
-³ Circle Algorithm ³
-ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+----------------------
+|  Circle Algorithm  |
+----------------------
 
 Circles have the property of being highly symetrical, which is handy
 when it comes to drawing them on a display screen.
@@ -201,9 +201,9 @@ we cannot precalculate them. The muliplications however are by 4, and we
 can accomplish this by shifting left twice.
 
 
-ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
-³ A Pascal General Line Procedure ³
-ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+-------------------------------------
+|  A Pascal General Line Procedure  |
+-------------------------------------
 
 The basic bresenham line algorithm can be modified to handle all types of
 lines. In this section assume that deltax = abs(x2 - x1) and
@@ -246,7 +246,7 @@ yinc2 = the amount to add to y when d >= 0
 The following is a simple example program which uses this technique:
 
 
-ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+-------------------------------------------------------------------
 
 {
 
@@ -333,12 +333,8 @@ begin
     end;
 end;
 
-ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-
-
-
-
+-------------------------------------------------------------------
 
 Note that if you are writing a line routine for mode 13h (for example) you
 can speed it up by converting the inner loop to assembly and including
@@ -347,7 +343,7 @@ the <x, y> values are stored in a single variable (screen) which holds the
 memory address of the current pixel, screeninc1 and screeninc2 are the
 update values for screen.
 
-ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+-------------------------------------------------------------------
 
 var screen : word;
     screeninc1, screeninc2 : integer;
@@ -394,6 +390,5 @@ var screen : word;
     loop @bres1
   end;
 
-ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-
+-------------------------------------------------------------------
