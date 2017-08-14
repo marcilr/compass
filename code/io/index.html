@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>I/O Routines</title>
+  </head>
+
+  <body bgcolor="FFFFFF">
+  
+  <center>
+  <table noborder width=90%" align="middle">
+  <TR><TD>
+  
+    <h1>I/O Routines</h1>
+    <P>
+  	 The digital compass required numerous
+  	 I/O routines to return characters, strings, integers,
+  	 and fixed point values.  These routines proved invaluable
+  	 during testing and developement. The 
+  	 following table shows the I/O routines used in the
+  	 <A HREF="../raymon/index.html">Raymon</A> monitor:
+    </P>
+    
+	 
+	 <table border cellpadding=2 cellspacing=1>
+	   <!-- ====== ARGC =========== -->
+	   <tr>
+	     <td><A HREF="files/argc.asm">ARGC</A></td>
+	     <td>Returns command line argument cound</td>
+	   </tr>
+	   
+	   <!-- ======= ARGV =========== -->
+	   <tr>
+	     <td><A HREF="files/argv.asm">ARGV</A></td>
+	     <td>Returns specified command line argument</td>
+	   </tr>
+
+		<!-- ====== BIN8OUT ======== -->
+	 	<tr>
+	 	  <td><A HREF="files/bin8out.asm">BIN8OUT</A></td>
+	 	  <td>Write 8-bit value in binary in ACC</td>
+	 	</tr>
+	 	
+	 	<!-- ====== BIN16OUT ====== -->
+	   <tr>
+	     <td><A HREF="files/bin16out.asm">BIN16OUT</A></td>
+	     <td>Write 16-bit value in binary in DPTR</td>
+	   </tr>
+	   
+	   <!-- ====== BIN32OUT ====== -->
+	   <tr>
+	     <td><A HREF="files/bin32out.asm">BIN32OUT</A></td>
+	     <td>Write 32-bit value in binary pointed to by R0</td>
+	   </tr>
+	   
+	   <!-- ========= COUT ====== -->
+	   <tr>
+	     <td><A HREF="files/cout.asm">COUT</A></td>
+	     <td>Write single character out in ACC</td>  
+	   </tr>
+	   
+	   <!-- ========= DEC8IN ========= -->
+	   <tr> 
+	     <td><A HREF="files/dec8in.asm">DEC8IN</A></td>
+	     <td>Get 8-bit unsigned value in ACC</td>
+	   </tr>
+	   
+	   <!-- ========= DEC8OUT ========== -->
+	   <tr>
+	     <td><A HREF="files/dec8out.asm">DEC8OUT</A></td>
+	     <td>Write unsigned 8-bit value in ACC</td>
+	   </tr>
+	   
+	   <!-- ========= DEC16OUT ============ -->
+	   <tr>
+	     <td><A HREF="files/dec16out.asm">DEC16OUT</A></td>
+	     <td>Write unsigned 16-bit value in DPTR</td>
+	   </tr>
+	     
+	   <!-- ========= DEC8SOUT =========== -->
+	   <tr>
+	     <td><A HREF="files/dec8sout.asm">DEC8SOUT</A></td>
+	     <td>Write signed 8-bit value in ACC</td> 
+	   </tr>
+	   
+	   <!-- ========= DEC16SOUT =========== -->
+	   <tr>
+	     <td><A HREF="files/dec16sout.asm">DEC16SOUT</A></td>
+	     <td>Write signed 16-bit value in DPTR</td> 
+	   </tr>
+	   
+	   <!-- ========= FOUTS ========== -->
+	   <tr>
+	     <td><A HREF="files/fouts.asm">FOUTS</A></td>
+	     <td>Write signed 16.16 value pointed to by R0</td>
+	   </tr>
+	   
+	   <!-- ======== PHEX ========= -->
+	   <tr>
+	     <td><A HREF="files/phex.asm">PHEX</A>
+	     <td>Write 8-bit ACC value in hex</td>
+	   </tr>
+
+	   <!-- ======== PHEX16 ========= -->
+	   <tr>
+	     <td><A HREF="files/phex16.asm">PHEX16</A>
+	     <td>Write 16-bit DPTR value in hex</td>
+	   </tr>
+	   
+	   <!-- ======== PRINT_STACK ======== -->
+	   <tr>
+	     <td><A HREF="files/print_stack.asm">PRINT_STACK</A>
+	     <td>Writes current value of stack pointer in hex</A>
+	   </tr>
+	   
+	   <!-- ======== PSTR ========= -->
+	   <tr>
+	     <td><A HREF="files/pstr.asm">PSTR</A>
+	     <td>Print string in program memory pointed to by DPTR</td>
+	   </tr>
+	   
+	   <!-- ======== SEND_CRLF ========= -->
+	   <tr>
+	     <td><A HREF="files/send_crlf.asm">SEND_CRLF</A>
+	     <td>Write carriage return/linefeed</td>
+	   </tr>
+	   
+	   <!-- ======== SEND_SPACE ========= -->
+	   <tr>
+	     <td><A HREF="files/send_space.asm">SEND_SPACE</A>
+	     <td>Write a single space</td>
+	   </tr>
+	   
+	   <!-- ======== STROUT ========= -->
+	   <tr>
+	     <td><A HREF="files/strout.asm">STROUT</A>
+	     <td>Writes STR string variable</td>
+	   </tr>
+	   
+	   <!-- ======== WRITE_PROMPT ========= -->
+	   <tr>
+	     <td><A HREF="files/write_prompt.asm">WRITE_PROMPT</A>
+	     <td>Writes the &quot;Raymon&quot; prompt</td>
+	   </tr>
+	   
+	   <!-- ======== WRITE_STR ========= -->
+	   <tr>
+	     <td><A HREF="files/write_str.asm">WRITE_STR</A>
+	     <td>Print string in RAM pointed to by R0</td>
+	   </tr>
+	   
+	   
+	 </table>
+
+    <table noborder><tr><td>&nbsp;</td></tr></table>
+    
+       <hr>
+    <address><a href="mailto:marcilr@saturn.math.uaa.alaska.edu">Raymond E. Marcil</a></address>
+    <!-- Created: Fri Apr 14 18:18:12 AKST 2000 -->
+    <!-- hhmts start -->
+    Last modified: Fri Apr 14 18:18:12 AKST 2000
+    <!-- hhmts end -->
+
+    </TD></TR>
+    </TABLE>
+    </center>
+ 
+  </body>
+</html>
