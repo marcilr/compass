@@ -33,6 +33,10 @@ development/
 docs/
   Documentation
 
+index.html
+  CS470 Digital Compass Project
+  Base web page
+
 overview/
   Overview
 
@@ -59,6 +63,9 @@ resources/
 
 summary/
   Summary
+
+template.html
+  Bare bones web page template
 
 trig/
   Trigonometry
