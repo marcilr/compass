@@ -79,4 +79,26 @@ pixels.html
   pset and pclr.
 
 rpt.html
+  Graphics Routines - 2D Point Rotation
+  The virtual compass needle is draw to the display by connecting five points
+  which define the compass needle. The compass needle is rotated by rotating the
+  five descrete points, that define the needle, about its origin. Bresenham's
+  line-drawing algorithm is then used to connect the dots.  To rotate the points
+  I used the standard 2D transformation as follows:
+  
+  x1=x*cos(a) - y*sin(a)
+  y1=x*sin(a) + y*cos(a)
+
 sprites.html
+  Graphics Routines - Sprites and Bitmaps
+  The compass monitor uses sprites to store and display bitmaps.  Sprites are used
+  to display alpha-numeric characters as well as special graphics.  This page only
+  has the theory behind my implementation.  If your'd like to see the actually 8052
+  assembly code please click here[1], and see the latest revision of raymon.asm for
+  the LCD and graphics routines. 
+
+
+Links
+=====
+[1] the actually 8052 assembly code please click here
+    file:///home/marcilr/git/projects/compass/code/raymon
