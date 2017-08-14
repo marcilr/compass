@@ -1,0 +1,67 @@
+README
+Created Sun Aug 13 16:48:14 AKDT 2017
+Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
+
+
+CS470 Digital Compass Project
+
+
+Sun Aug 13 16:48:14 AKDT 2017
+=============================
+Found the "Digital Compass Prototype - Raymond Marcil" cdrom on the shelf amongst a 
+quadrillion other cdroms.  Was was my senior project when I graduated with my degree
+in Computer Science from the University of Alaska Anchorage in 2000.
+
+I've been meaning to look at this for awhile.  Whilst digital compasses are now
+readily available from REI and Cabela's for the time this was a great project.  
+
+
+Filelist
+========
+index.html
+template.html
+
+archives/
+  Archives
+
+code/
+  Code
+
+development/
+  Development
+
+docs/
+  Documentation
+
+overview/
+  Overview
+
+parts/
+  Parts
+
+pcb/
+  Printed circuit board
+
+pdf/
+  Portable Document Format files
+
+pics/
+  Pictures
+
+purchase/
+  Need to Purchase
+  Almost everything on this page has been purchased already or is not being used in the
+  current compass design.  I've left this here because it has a good list of part numbers
+  for future reference.
+
+resources/
+  Resources
+
+summary/
+  Summary
+
+trig/
+  Trigonometry
+
+8051/
+  8051 microcontroller
