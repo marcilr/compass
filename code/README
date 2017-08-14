@@ -27,8 +27,20 @@ circular/
   never ends.
 
 dispatcher/
+  Central Dispatcher
+  Commands can be issued to the compass via the serial port.  Whenever the serial interrupt
+  handler receives a carriage return the command flag is set indicating a command has been
+  recieved.  Subsequently when main event loop finds the command flag set the central dispatcher
+  is called to process the command.  In this way the interrupt handling is able to communicat
+  with the main event loop.  The dispatcher gets the command from the input buffer and scans a
+  jump table for the command.  If the command is found the routine is jumped te in an entry in
+  the jump table, then test the specific command.ble during developement.  I was able to code up
+  test routines code in an entry in the jump table, then test the specific command.
 
-fancy_compass2.jpg
+  There wasn't much information available on coding up a dispatcher for the 8052 available.
+  I did find Peter Norton's Assembly Language Book for the IBM PC useful.  Particularly the
+  dispatcher section section, pages 218-222, while this book is 8088 specific it did serve of
+  as a basic concept guide.
 
 files/
 graphics/
