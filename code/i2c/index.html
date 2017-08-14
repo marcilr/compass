@@ -1,0 +1,155 @@
+<html>
+<head>
+<title>Raymon</title>
+</head>
+<body bgcolor="FFFFFF">
+
+<center>
+<table noborder width="90%" align="middle">
+<tr><td>
+
+<table noborder cellpadding=10>
+  <tr>
+    <td valign="middle">
+      <img src="pics/i2c-gold.gif">
+    </td>
+  <td valign="middle">
+    <H1>2-wire Interface</h1>
+  </tr>
+</table>
+
+<P>
+I haven't actually implemented any I<sup>2</sup>C devices on the digital
+compass but it looked promising for some type of devices, particularly
+the serial non-voltile RAMS and EEPROMs.  The information
+here is for my own referencence.
+The I<sup>2</sup>C interface is a simple 2-wire bus that allows specialized IC's
+like a/d converters, digital potenciometers, serial eeproms, etc. 
+to be connected to computers and microcontrollers.
+</P>
+
+<P>
+<table width="500" cellspacing=1 cellpadding=2 border=0>
+  <tr bgcolor="#000080">
+    <td colspan=4 align="left">
+      <font color="#FFFFFF">
+        <b>I<sup>2</sup>C Devices</b>
+      </font>
+    </td>
+  </tr>
+
+  <!-- Header -->
+  <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>P/N</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>Manufacturer</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>Description</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>Form Factor</font></td>
+  </tr>
+  
+   <tr bgcolor="#EFEFEF">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>AT24C128</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>Atmel</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>16kx8 Serial EEPROM</b></font></td>
+    <td align="left"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8-pin PDIP, SOIC, TSSOP14</b></font></td>
+  </tr>  
+  
+  <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>AT24C256</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>Atmel</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>32kx8 Serial EEPROM</b></font></td>
+    <td align="left"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8-pin PDIP, SOIC, TSSOP14</b></font></td>
+  </tr>
+  
+  <tr bgcolor="#EFEFEF">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>24AA64/24LC64</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>Microchip</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8kx8 Serial EEPROM</b></font></td>
+    <td align="left"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8-pin PDIP, SOIC, TSSOP</b></font></td>
+  </tr>  
+  
+  <!-- ==============STMicroelectronics========================================= -->
+  
+  <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>M24C64</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>STMicroelectronics</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8kx8 Serial EEPROM</b></font></td>
+    <td align="left"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8-pin PDIP, SO, SO Wide, TSSOP14</font></td>
+  </tr>
+  
+   <tr bgcolor="#EFEFEF">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>M24128</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>STMicroelectronics</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>16kx8 Serial EEPROM</b></font></td>
+    <td align="left"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8-pin PDIP, SO, TSSOP14</b></font></td>
+  </tr>  
+  
+  <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>M24256</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>STMicroelectronics</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>32kx8 Serial EEPROM</b></font></td>
+    <td align="left"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8-pin PDIP, SO Wide</font></td>
+  </tr>
+  
+  <!-- National Semiconductor================================================== -->
+  
+  <tr bgcolor="#EFEFEF">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>NM24C65U</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>National Semiconductor</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8kx8 Serial EEPROM</b></font></td>
+    <td align="left"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8-pin PDIP, SO</b></font></td>
+  </tr>  
+  
+</table>
+</P>
+
+    <P>
+    <font face="Arial" size=2>
+      <B>Technical/Apps sheets:</B> <br>
+    </font>
+    <font face="Arial" size=1>
+      (1) <a href="pdf/at24c128_256.pdf">
+         Atmel AT24C128/256</A><br>
+      (2) <a href="pdf/24xx64.pdf">Microchip 24AA64/24LC64</A><BR>
+      (3) <A HREF="pdf/m24c64.pdf">STMicroelectronics M24C64</A><BR>
+      (4) <A HREF="pdf/m24128.pdf">STMicroelectronics M24128</A><BR>
+      (5) <A HREF="pdf/m24256.pdf">STMicroelectronics M24256</A><BR>
+      (6) <A HREF="pdf/nm24c65u.pdf">National Semiconductor NM24C65U</A><BR>
+      (7) <A HREF="pdf/pcf8583.pdf">Signetics I2C Real Time Clock</A><BR>
+    </font>
+    </P>
+
+   <P>
+      <FONT FACE="arial,helvetic" SIZE="2">
+        <B>Links:</B><BR>
+      </FONT>
+      <FONT FACE="arial,helvetica" SIZE="1">
+      	 (1) <A HREF="http://www-us2.semiconductors.philips.com/i2c/">
+      	     Phillips</a> - I<sup>2</sup>C Home page<br>
+      	 (2) <A HREF="http://www.atmel.com">Atmel</a><br>
+      	 (3) <A HREF="http://www.microchip.com">Microchip</a><br>
+      	 (4) <A HREF="http://www.st.com">STMicroelectronics</A><BR>
+         (4) <A HREF="http://www.specs.de/users/danni/appl/soft/c51/eeprom/index.htm">
+              I2C Interface Routines</A> - Assembly rotuines for interfacing
+              a 24C16 serial eeprom to the 8051.<BR>
+	 (5) <A HREF="http://devseek.com/Hardware/Buses/I2C/">
+	     Devseek</A> - List of I2C resources.<BR>
+	 (6) <A HREF="http://www.embedded.com/97/feat9711.htm">
+            Understanding and Using the I2C Bus</A><BR>
+     (7) <a href="http://www.geocities.com/SiliconValley/2017/electronics/i2c.html">
+         I2C routines</A> - look good</A><BR>
+      </FONT>
+   </P>
+   
+            <hr>
+    <address><a href="mailto:marcilr@saturn.math.uaa.alaska.edu">Raymond E. Marcil</a></address>
+    <!-- Created: Fri Apr 14 18:18:12 AKST 2000 -->
+    <!-- hhmts start -->
+    Last modified: Fri Apr 21 18:18:12 AKST 2000
+    <!-- hhmts end -->
+
+</td></tr>
+</table>
+</center>
+
+</body>
+</html>
