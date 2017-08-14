@@ -1,0 +1,349 @@
+<html>
+<head>
+<title>Circular Buffers</title>
+</head>
+<body bgcolor="FFFFFF">
+
+<center>
+<TABLE noborder width="90%" align="middle">
+<TR><TD>
+
+<h1>Circular Buffers</h1>
+
+<P>
+In some applications which require incoming data to be processed serially 
+and data may come in before the microcontroller can devote the cycles to 
+processing it, the incoming data has to be "buffered" (saved) for some 
+period of time. Ideally, the algorithms used for saving and retrieving this data, 
+as well as maintaining the buffer should be as simple and fast executing as
+possible. Like most problems, there are many ways of solving it, with one of 
+the best being the "circular buffer".
+</P>
+
+<P>
+A circular buffer is a memory area that has been set aside for an index to store 
+data and another index to retrieve the data. Once an index has reached the end of 
+the buffer, it is reset to the start of the buffer. In this way, the buffer 
+is "circular" in that it never ends. 
+</P>
+
+<P>
+To "Push" data into such a buffer, the following code could be used: 
+</P>
+
+<!===========Code to push accumulator into circular buffer================ -->
+
+   <table cellpadding=10 border=2 bgcolor="#FFFBF0">
+      <tr><td valign=top>
+<FONT face="courier" SIZE="2">
+<PRE>
+Push:                                ; Push Accumulator into Circular Buffer
+   mov  @R0,A                        ; Put A into buffer at location pointed to by R0
+   inc  R0                           ; Increment pointer
+   cjne R0,#BufferEnd+1,PushEnd
+   mov  R0,#BufferStart              ; If at the End of the Buffer, point to start.
+
+PushEnd:
+   ret
+
+</PRE>
+</FONT>
+</TABLE>
+
+<P>
+After "Push" has gone through each address, the data pointer ("R0") 
+is reset to the start of the buffer. I used "R0" as the index
+because it can be compared to and updated without affecting the 
+contents of the accumulator or PSW register. 
+</P>
+
+<P>
+This can be improved by sizing and locating the buffer in such a way 
+that it's starting address has a "0" at the least significant bit
+before the bits used to address within the buffer. For a sixteen 
+byte circular buffer, having bit four of the address always reset
+will allow the "Push" routine to be simplified to:
+</P>
+
+   <table cellpadding=10 border=2 bgcolor="#FFFBF0">
+      <tr><td valign=top>
+<FONT face="courier" SIZE="2">
+<PRE>
+Push:                                    ; Push Accumulator into Circular Buffer
+   mov  @R0,A                            ; Put A into buffer and increment pointer
+   inc  R0                               ; Point to the next Location in the buffer
+   anl  R0,#(BufferStart+(BufferSize-1))
+   ret
+</PRE>
+</FONT>
+</TABLE>
+
+<P>
+  <FONT FACE="arial,helvetica" SIZE="2">
+    <B>Detailed Example</B><BR>
+  </FONT>
+The above is taken from 
+<A HREF="http://www.myke.com/">Myke Predco's page</A> and I thought I'd add a bit more.
+For instance if we wanted a 16 (10h) byte ring buffer located at 80h:
+</P>
+
+<PRE>
+  Ring Buffer Mask = BufferStart + (BufferSize-1)
+                   = 80h + (10h - 1h)
+                   = 8Fh
+                   = 10001111b
+</PRE>  
+
+<P>
+The table on the left shows what happens when the buffer index exceeds the size of the buffer. 
+By bitwise anding the buffer pointer with the buffer mask the 8-bit address is wrapped back
+to the start of the buffer.
+</P>
+
+<table noborder aling="middle" cellpadding=20>
+<tr valign="top"><td>
+
+<table width="300" cellspacing=1 cellpadding=2 border=0 bgcolor="#DEDEDE">
+  <!-- Header -->
+  <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>Buffer<BR>Index</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>Physical<BR>Address</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>Address<BR>in Binary</b></font></td>
+    <td align="middle">
+      <font face="verdana,geneva,arial,sans-serif" size="1">
+        Address bitwise<BR>
+        anded with mask
+      </font>
+    </td>
+  </tr>
+              
+  <tr bgcolor="#EFEFEF">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>0</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>80h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000000</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000000</b></font></td>
+  </tr>             
+
+  <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>1</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>81h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000001</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000001</b></font></td>
+  </tr>
+  
+  <tr bgcolor="#EFEFEF">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>2</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>82h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000010</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000010</b></font></td>
+  </tr>     
+  
+    <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>3</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>83h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000011</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000011</b></font></td>
+  </tr>
+  
+  <tr bgcolor="#EFEFEF">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>4</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>84h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000100</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000100</b></font></td>
+  </tr>  
+  
+    <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>5</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>85h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000101</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000101</b></font></td>
+  </tr>
+  
+  <tr bgcolor="#EFEFEF">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>6</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>86h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000110</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000110</b></font></td>
+  </tr>  
+  
+    <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>7</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>87h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000111</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000111</b></font></td>
+  </tr>
+  
+  <tr bgcolor="#EFEFEF">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>88h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10001000</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10001000</b></font></td>
+  </tr>  
+  
+    <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>9</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>89h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10001001</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10001001</b></font></td>
+  </tr>
+  
+  <tr bgcolor="#EFEFEF">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8Ah</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10001010</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10001010</b></font></td>
+  </tr>  
+  
+    <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>11</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8Bh</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10001011</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10001011</b></font></td>
+  </tr>
+  
+  <tr bgcolor="#EFEFEF">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>12</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8Ch</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10001100</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10001100</b></font></td>
+  </tr>  
+  
+    <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>13</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8Dh</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10001101</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10001101</b></font></td>
+  </tr>
+  
+  <tr bgcolor="#EFEFEF">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>14</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8Eh</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10001110</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10001110</b></font></td>
+  </tr>  
+  
+    <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>15</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>8Fh</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10001111</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10001111</b></font></td>
+  </tr>
+  
+  <tr bgcolor="#EFEFEF">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>16</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>90h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10010000</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000000</b></font></td>
+  </tr>  
+  
+  <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>17</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>91h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10010001</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000001</b></font></td>
+  </tr>
+  
+  <tr bgcolor="#EFEFEF">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>18</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>92h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10010010</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000010</b></font></td>
+  </tr>  
+  
+  <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>19</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>93h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10010011</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000011</b></font></td>
+  </tr>
+</table>
+
+</td>
+<td>
+
+<table width="300" cellspacing=1 cellpadding=2 border=0>
+  <tr bgcolor="#000080">
+    <td colspan=2 align="middle"><font color="#FFFFFF"><b>Acceptable</b></font></td>
+    <td colspan=2 align="middle"><font color="#FFFFFF"><b>Unacceptable</b></font></td>
+  </tr>
+
+  <!-- Header -->
+  <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>Hex Address</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>In Binary</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>Hex Address</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>In Binary</font></td>
+  </tr>
+  
+   <tr bgcolor="#EFEFEF">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>80h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10000000</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>90h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10010000</b></font></td>
+  </tr>  
+  
+  <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>A0h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10100000</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>B0h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>10110000</b></font></td>
+  </tr>
+  
+  <tr bgcolor="#EFEFEF">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>C0h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>11000000</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>D0h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>11010000</b></font></td>
+  </tr>  
+  
+  <tr bgcolor="#BEBEBE">
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>E0h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>11100000</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>F0h</b></font></td>
+    <td align="middle"><font face="verdana,geneva,arial,sans-serif" size="1"><b>11110000</b></font></td>
+  </tr>
+  
+  <tr><td colspan="4">&nbsp;</td></tr>
+  
+  <tr>
+    <TD colspan="4" bgcolor="FFFFFF">
+       <P>
+       The above table shows some acceptable and unacceptable addresses for this sized ring buffer.
+       Note the deciding factor for the buffer location is the the fifth bit of the address.
+       If it's a zero the address is acceptable, if it's a one the address is unacceptable.  The reason
+       stems from the fact that the fifth byte of the address will get whacked when the buffer mask is applied.
+       </P>
+       <P>
+       Additionally, I'm only showing addresses from 80h to FFh, but you can certainly use memory
+       from 30h to 7Fh (assuming an 8051), so long as your ring buffer doesn't conflict with the stack.
+       </P>
+    </td>
+  </tr>
+  </table>
+
+
+</td></tr>
+</table>
+</center>
+
+<P>
+  <FONT FACE="arial,helvetica" SIZE="2">
+    <B>Links:</B><BR>
+  </FONT>
+  <FONT FACE="arial,helvetica" SIZE="1">
+    (1) <A HREF="http://www.myke.com/8051/page4.htm">Myke Predco's code snippets</A>
+  </FONT>
+</P>
+
+      <hr>
+    <address><a href="mailto:marcilr@saturn.math.uaa.alaska.edu">Raymond E. Marcil</a></address>
+    <!-- Created: Fri Apr 14 18:18:12 AKST 2000 -->
+    <!-- hhmts start -->
+    Last modified: Fri Apr 21 18:18:12 AKST 2000
+    <!-- hhmts end -->
+
+</td></TR>
+</table>
+
+</body>
+</html>
