@@ -1,0 +1,135 @@
+<html>
+<head>
+<title>8051Serial Port Code</title>
+</head>
+<body bgcolor="FFFFFF">
+
+<center>
+<table noborder width="90%" align="middle">
+<tr><td>
+
+<table noborder>
+  <tr>
+    <td valing="middle">
+      <img src="pics/fancy_compass2.jpg">
+    </td>
+  <td valign="middle">
+    <H1>Interrupt Handlers</h1>
+  </tr>
+</table>
+
+<P>
+The digital compass is interrupt driven. The AT89C52 microcontroller has 
+several vectored interrupt handlers
+that process routine events. One thing that confused me when I
+was first writing interrupt routines was how to ensure that
+resources, like the circular buffers, are not accessed simultaneous 
+by different routines. This sounds simple and the solution pretty easy.  
+The trick is to use mutexes, single bit flags that indicate a resource
+is being used. In this way routines can set a mutex bit to lock a resource
+so the interrupt handlers know that a particular resource is in use and should return
+control to the main program before trying to process the interrupt. 
+Timer0 is used to generate an interrupt every 50ms
+that sets flags to initiate an A/D conversion and draw the compass
+needle in the main event loop. The serial inturrupt is initiates whenever
+data is received or sent from the serial port. This interrupt accesses 
+two circular buffers (incoming and outgoing) and ensures serial data is 
+processed according.  This includes passing commmands to the central 
+dispatcher as well controlling two circular buffers for incoming and
+outgoing characters. The serial interrupt handler was one of the more difficult
+routines to write for the compass. The final inturrupt the compass uses 
+is External Interrupt 0.  This is an external pin on the microcontroller that 
+is used by the A/D converters to signal that calibration or a conversion has 
+been completed.  Below is a list of the interrupts and associated assembly
+code:
+
+    <UL>
+        <LI><A HREF="files/timer0.asm">timer0.asm</A> - Timer0 interrupt handler.
+        <LI><A HREF="files/serial.asm">serial.asm</A> - Serial interrupt handler.
+        <LI><A HREF="files/extint0.asm">extint0.asm</A> - External interrupt 0 handler.
+        <LI><A HREF="pics/extint0_timer0.gif">extint0_timer0.gif</A> - Flowchart that
+        illustrates the external interrupt 0 handler, also available as a 
+          <A HREF="pics/extint0_timer0.vsd">Visio document</A>.
+        <LI><A HREF="pics/serial.gif">serial.gif</A>
+          - Flowchart that illustrates the serial inturrupt handler, also
+          shows the use of the mutexes I described previously.
+    </UL>
+	
+    <table><tr><td>&nbsp;</td></tr></table>
+
+<P>
+The following example shows a very simple serial inturrupt handler.
+The handler is called whenever the RI (Receive character) or TI (Transmit 
+charcter) interrupt flags are set. This example echos received characters
+and clears the inturrupt flags as needed.  From this example it is possible
+to add code to put/get the characters from buffers and process special keys
+like carriage return, esc, etc. Needless to say the compass serial inturrupt
+handler is a bit more complex than this one.
+
+</P>
+<!===========Serial Interrupt example to echo characters================ -->
+
+   <table cellpadding=10 border=2 bgcolor="#FFFBF0">
+      <tr><td valign=top>
+<FONT face="courier" SIZE="2">
+<PRE>
+; Serial Port Interrupt Example (my own)
+; This simple example takes all characters received by 
+; the UART and echos them back out.
+;
+; It assumes that the serial port has been initialized,
+; and ES (Enable Serial), and EA (Enable all interrupts) have
+; been set.
+
+
+   .ORG   0x0023                    ; Serial port interrupt
+    ljmp  rs232
+
+    rs232:
+       push  psw
+       push  acc
+       jnb   ri,xmit
+    
+       clr   ri
+       mov   a,sbuf                     ; Get character
+       mov   sbuf,a                     ; Output character
+       
+    xmit:
+       jnb   ti,exit
+       clr   ti
+    
+    exit:
+       pop   acc
+       pop   psw
+       reti
+</PRE>
+</td></tr>
+</table>
+
+<P>
+  <FONT FACE="arial,helvetica" SIZE="2">
+    <B>Links:</B><BR>
+  </FONT>
+  <FONT FACE="arial,helvetica" SIZE="1">
+    (1) <A HREF="files/serial.asm">serial_example.asm</A> - Nice example of serial
+      interrupt handler.<BR>
+    (2) <A HREF="http://physinfo.ulb.ac.be/cit_courseware/i8051/part6.htm">8051 Microcontrollers</A>
+      - link for above code.
+  </FONT>
+</P>
+
+
+      <hr>
+    <address><a href="mailto:marcilr@saturn.math.uaa.alaska.edu">Raymond E. Marcil</a></address>
+    <!-- Created: Fri Apr 14 18:18:12 AKST 2000 -->
+    <!-- hhmts start -->
+    Last modified: Tue May 2 18:18:12 AKST 2000
+    <!-- hhmts end -->
+
+
+</tr></td>
+</table>
+</center>
+
+</body>
+</html>
