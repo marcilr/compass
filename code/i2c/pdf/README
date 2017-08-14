@@ -15,6 +15,10 @@ at24c128_256.pdf
   2-wire Serial EEPROMS
 
 m24128.pdf
+  ST M24256 and M24128
+  256/128 Kbit Serial I2C Bus EEPROM
+  Without Chip Enable Lines
+
 m24256.pdf
 m24c64.pdf
 nm24c65.pdf
