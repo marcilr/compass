@@ -32,8 +32,15 @@ page_alignment.psd
   for Densitron LM4064
 
 rotation.gif
+  Graphic showing rotation of square box around point
+
 roteqn.gif
-row_major.gif
+  Rotation equation
+
+row_major.gif (396x156)
 row_major.psd
-two.gif
+  Row major pixelation, into bits, of digit "2"
+
+two.gif (476x180)
 two.psd
+  Row major pixelation, into bits, of digit "2"
