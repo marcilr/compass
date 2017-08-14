@@ -1,0 +1,1074 @@
+<html>
+<pre>
+<Title>LCD Frequently Asked Questions</title>
+<h1>LCD Frequently Asked Questions</h1>
+<h2>Compiled by: BRUCK SCOTT (sbruck@harmony2.erl.mei.co.jp)</h2>
+<hr>
+</pre>
+<strong>Liquid Crystal Display (FAQ) Frequently Asked Question </strong><p>
+
+Fundamental Liquid Crystal Display Technology:
+a multi-part introduction for the basic understanding of
+Liquid Crystal Displays
+<p>
+Version 1.00  August 18, 1993   By Scott M. Bruck
+<p>
+This FAQ should be printed in 9 POINT MONACO FONT
+<hr>
+Since the introduction, rapid decline in price, and increased 
+availability of notebook computers capable of
+operating Graphical User Interfaces (GUIs--MacOS and
+Windows),  there has been an increased interest in flat
+panel display technology.  A notebook/palmtop computer 
+requires a light weight, durable, and reliable display.  
+Liquid Crystal Display technology has met these requirements 
+and as a result, virtually all notebook computers are equipped 
+with some form of LCD.  This FAQ is intended to address the 
+general confusion concerning LCDs that has arisen recently by 
+explaining the technology, operation, and characteristics of 
+this important display device.
+<hr>
+<h1>INDEX</h1>
+<h2>Part I. Liquid Crystal Display Fundamentals:</h2> 
+
+1) A general discussion of how liquid crystal displays work.  <p>
+2) A basic introduction to the chemistry, structure, and  
+properties of liquid crystals used in displays.  <p>
+3) An overview of display structure, assembly, and related 
+technology is summarized.<p>
+
+<h2>Part II. Addressing Technology: Passive and Active Matrix 
+Displays:</h2>
+
+1) The differences between Active and Passive matrix display 
+addressing techniques is examined<p>
+2) Color technology applicable to liquid crystal displays is 
+discussed.<p>
+
+<h2>Part III: New Technology and Questions Answered:</h2>
+
+1) State of the art displays being prototyped are described.<p> 
+<!-- 2) A list of <a href="acronyms.html#ref_tft">TFT</a> display manufacturers is 
+summarized and a list of what notebook computers use what TFT display. <p> -->
+3) Solutions to questions proposed on Internet news groups not 
+covered in the body of the LCD FAQ text.<p>
+
+<hr>
+<h2>LCD FAQ Part I: Liquid Crystal Display Fundamentals</h2>
+
+<strong>1.0 General Characteristics and LCD Modes</strong><p>
+
+    Liquid Crystal Displays (LCDs) are categorized as non-
+emissive display devices, in that respect, they do not produce 
+any form of light like a Cathode Ray Tube (CRT).  LCDs either 
+pass or block light that is reflected from an external light 
+source or provided by a back/side lighting system.  There are 
+two modes of operation for LCDs during the absence of an 
+electric field (applied Power); a mode describes the 
+transmittance state of the liquid crystal elements.  Normal 
+White mode: the display is white or clear and allows light to 
+pass through and Normal Black Mode: the display is dark and 
+all light is diffused. Virtually all displays in production 
+for PC/Workstation use are normal white mode to optimize 
+contrast and speed.<p>
+
+<strong>1.1 LCD Cell Switching and Fundamentals</strong><p>
+
+    A simplified description of how a dot matrix LCD display 
+works is as follows: A twisted nematic (TN) LC display 
+consists of two polarizers, two pieces of glass, some form of 
+switching element or electrode to define pixels, and driver 
+Integrated Circuits (ICs) to address the rows and columns of 
+pixels.  To define a pixel (or subpixel element for a color 
+display), a rectangle is constructed out of Indium Tin Oxide 
+-- a semi-transparent metal oxide (ITO) and charge is applied 
+to this area in order to change the orientation of the LC 
+material ( change from a white pixel to a dark pixel).  The 
+method utilized to form a pixel in passive and active matrix 
+displays differs and will be described in later sections.  
+Figure 1 illustrates a cross sectional view of a simple TN LC 
+display. Figure 2 depicts a dot matrix display as viewed 
+without its metal module/case exposing the IC drivers.  
+Looking directly at the display the gate or row drivers are 
+located either on the left or the right side of the display 
+while the data or column drivers are located on the top (and 
+or bottom) of the display.  New thin display module technology 
+mounts the ICs on conductive tape that allows them to be 
+folded behind the display further reducing the size of the 
+finished module.  An IC will address a number of rows or 
+columns, not just 1 as pictured in figure 2.<p>
+<pre>
+	Figure 1: Cross Section of a Simple LC Display
+
+
+        viewer
+/////////////////////////////////////  Polarizer
+_____________________________________  glass
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Liquid Crystal    
+_____________________________________  glass
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  Polarizer
+        backlight
+
+
+
+Figure 2: LCD panel and IC driver locations
+
+________________________________________
+|					|
+|			IC	IC	| Source/Column ICs
+|			|		|
+|			|		|
+|IC---------------------Pixel		|
+|					|
+|IC <---- Gate Line/Row IC		|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* An IC driver will address a number of row/column lines and 
+not just the single pixel in the diagram above
+
+</pre>
+Polarizers are an integral part of a LCD display, possessing 
+the unique property of only passing light if it is oriented in 
+a specific (oriented) direction.  To utilize this 
+phenomena in TN LC displays, the bottom polarizer orients 
+incoming light in one direction.  The oriented light passes 
+through the LC material and is either unaltered or "bent" 90 
+degrees.  Depending on the orientation of the top polarizer, 
+this light will either pass through or be diffused.  If the 
+light is diffused, it will appear as a dark area.  Figure 3 is 
+a simple illustration of the sequence of events that occur 
+when light passes through a simple twisted nematic LC display.
+<p>
+<pre>
+Figure 3: Polarized Light and its use in a TN LC display 
+
+Light (unoriented) will be defined as:	 !#$%&|-
+Polarizer Orientation is defined by:	( $ or # ) 
+($ polarizer will only pass $ light)
+(# polarizer will only pass # light) THEREFORE:
+
+Light	 Polarizer   result   LC (90   result  Polarizer   Image
+Input	 type        passed   degree   passed  type 	   output
+			      twist)
+		
+!##$%%&|-> |  #  | -> #### -> ~~~~~ -> $$$$ ->| # | ------> Black 
+
+!##$%%&|-> |  #  | -> #### -> ~~~~~ -> $$$$ ->| $ | ------> White 
+</pre>
+<pre><p><p><p></pre>
+
+<strong>1.2 Liquid Crystal Material</strong><p>
+
+<strong>	1.21 Fundamentals</strong><p>
+
+    Please note, I am not a chemist, so I will keep this
+section as simple and concise as possible.  Liquid crystals 
+encompass a broad group of materials that posses the 
+properties of both a solid and a liquid.  More specifically, 
+they are a liquid with molecules oriented in one common 
+direction (having a long range and repeating pattern-- 
+definition of a crystal), but have no long range order in the 
+other two directions.  For example, in figure 4 all the lines 
+are oriented in the Y direction (up and down), but they posses 
+no common ordering in the x direction (disorder is assumed in 
+the Z direction).  To more easily visualize this, think of 
+figure 4 as one thin slice (one layer of molecules to be 
+exact) of a block of material.  If you examined another slice, 
+the molecules would still be oriented in the Y direction, but 
+they would be in different positions along the X-axis.  By 
+stacking millions of these thin slices, the Z direction is 
+built up and as a result of the change in relative position on 
+the x-axis, the Z direction has no long range order.
+<pre>
+^ Y
+|                 Figure 4
+|           
+|
+|
+|    ||||    |||     ||      |       |||||
+|
+|        ||||||||     |||||||||||||     ||||    |
+|
+|    ||||||       |||||        ||||    ||||
+|  |||||||
+|
+|------------------------------------------------------> X
+
+* The Z direction is coming out of the page toward the reader
+</pre>
+<p>
+The liquid crystals used for display technology are
+thermotropic liquid crystals; they exhibit desired 
+characteristics over a specific temperature range.  This is 
+the primary reason why LCDs do not operate properly when they 
+are too cold or too warm.  If liquid crystals are too cold, 
+they will not twist and the display will not form an image.  
+If the display is too warm, the resistance of the liquid 
+crystal material changes and this alters the properties of the 
+display and performance suffers.  Liquid crystal material for 
+display use is normally referred to as TN (STN, DSTN, MSTN, 
+and etc.) or Twisted Nematic--sometimes known as TNFE or 
+Twisted Nematic Field Effect.  It is called TWISTED since the 
+crystals are twisted 90 degrees (or more for STN) from the top 
+piece of glass to the bottom piece of glass.  (TN usually 
+refers only to a 90 degree twist.) Field Effect (a direct 
+correlation is the semiconductor MOSFET), refers to the LC 
+material's ability to align parallel or perpendicular to an 
+applied electric field.  As a result, using twisted or 
+untwisted liquid crystal and two polarizers; an applied 
+electric field can force the LC material into a particular 
+alignment effectively diffusing or passing light through the 
+top polarizer.
+<p>
+As a note of interest, polarizers are also one of the major 
+reasons that LC displays require bright back lighting.  The 
+polarizers and liquid crystal materials absorb more than 50% 
+of the incident light.  As a result, even though the actual
+display is a very low power device, the power hungry back
+lighting makes a LCD module one of the primary causes of
+short battery life in notebook computers.  Due to the fact 
+that the LC material has optical properties and effectively 
+bends light, the problem of viewing angle effects occur.  When 
+the user is not directly in front of the display the image can 
+disappear or seem to invert (dark images become light and 
+light images become dark).  However, LC material and polarizer 
+technology is rapidly improving and that improvement is 
+showing up in brighter displays with greater viewing angles.
+<p>
+
+<strong>	1.22 Liquid Crystal Alignment</strong><p>
+
+Liquid crystals must be aligned to the top and bottom
+pieces of glass in order to obtain the desired twist. In other 
+words, the 90 degree twist is formed by anchoring the liquid 
+crystal on one glass plate and forcing it to twist across the 
+cell gap (the distance between the two glass plates) when 
+contacting the second plate.  Furthermore, The actual image 
+quality of the display will be dependent on the surface 
+alignment of the LC material.  The method currently used for 
+aligning liquid crystals was developed by the Dai-Nippon 
+Screening (English= Big Japan Screening) Company.  The process 
+consists of coating the top and bottom sheets of glass with a 
+Polyimide based film. The top piece of glass is coated and 
+rubbed in a particular orientation; the bottom panel/polyimide 
+is rubbed perpendicular (90 degrees for TN displays) with 
+respect to the top panel.  It was discovered that by rubbing 
+the polyimide with a cloth, nanometer (1 X 10 - 9 meters) size 
+grooves are formed and the liquid crystals align with the 
+direction of the grooves.  It is common that when assembling a 
+TN LC cell, it will be necessary to eliminate patches of non-
+uniform areas.  The two parameters required to eliminate the 
+nonuniformities and complete the TN LC display are pretilt 
+angle and cholesteric impurities. TN LC cells commonly have 
+two problems that affect uniformity following assembly: 
+reverse tilt and reverse twist.  Reverse tilt is a function of 
+the applied electrical field and reverse twist is common when 
+no electrical field is applied.  Reverse twist is eliminated 
+by the introduction of cholesteric additives and reverse tilt 
+is eliminated by introducing a pre-tilt angle to the LC 
+material.  The pre-tilt angle also determines what direction 
+the LC molecules will rotate when an electrical field is 
+applied.  Pre-tilt angle can be visualized by considering the 
+normal position of the LC molecule to be flat against the 
+glass plate, by anchoring one edge and forcing the other 
+upward by a specific number of degrees, a pretilt angle is 
+established.<p>
+
+<strong>	1.23 Liquid Crystal Display Names and classes</strong><p>
+
+Before discussing the different types of LC displays the topic 
+of Birefringence must be explained.  When a light ray strikes 
+a crystal ( or crystal-like material), it will be split into 
+two separate light beams; with one beam perpendicular (offset 
+by 90 degrees) from the other.  Since the beams travel 
+different paths, they reach the viewer's eyes at slightly 
+different times.  This is an essential point, it may cause the 
+color or polarity of the display to change when viewed at 
+angles where the viewer may see both rays.
+<p>
+For active matrix displays, in order to maximize contrast
+and gray scale reproducibility, Twisted Nematic (TN) is 
+utilized.  This material is twisted 90 degrees from the top to 
+bottom glass panels.  STN or Super Twisted Nematic is 
+chemically distinct from TN and the twist angle is usually 
+greater than 200 degrees.  Furthermore, due to the large twist 
+angle, the actual alignment of the polarizers for STN LCDs are 
+not perpendicular, but  adjusted to find the best direction 
+(rotation) for optimum display characteristics.  The STN 
+material is rotated in a way so the change from transmission 
+to dispersion is very abrupt and therefore can respond quickly 
+to small changes in voltage.  Figure 5 illustrates the 
+response characteristics of a TN curve and Figure 6 shows the 
+response characteristics of a STN curve which will further 
+clarify these points.
+<p>
+<pre>
+100%	|			Figure 5
+	|	Typical Response of a Normal White TN Display
+T	|
+R	|************
+A	|             *
+N	|               *
+S	|<-- Zone I->     *
+M	|                   *
+I	|                     *
+T	|                       *
+T	|                         *
+A	|                           *
+N	|             <----Zone II--- * --------->
+C	|                               *
+E	|                                  *       <--Zone III-->
+	|                                     *
+	|                                       *
+	|                                          *************
+0%	|________________________________________________________>
+                     Vt (Threshold Voltage)
+	Applied Voltage
+</pre>
+
+<strong>	1.24 The TN Liquid Crystal Response Curve</strong><p>
+
+The most prominent feature of the TN response curve is the 
+central linear region between the two flat areas (Zone II).  
+Zone I describes the white color of the display when no 
+electric field is applied.  In other words, the display will 
+transmit virtually all the introduced light.  On the other 
+hand, in Zone III, the display will diffuse light and appear 
+dark.  The middle region can display gray scale or an image
+somewhere between White and Black.  The key point here is that 
+you must be able to very carefully control the voltage applied 
+to the LC cell and maintain it for one duty cycle (before that 
+pixel is addressed again) in order to produce accurate colors.  
+For this reason, this type of LC material is primarily used 
+for active matrix LCDs. <p>
+
+COMMONLY ASKED QUESTION NOTE: because the LC material is 
+partially twisted in the gray scale area, when looking at a 
+display at an off angle the colors tend to shift and sometimes 
+invert due to birefringence.  <p>
+
+COMPUTER APPLICATION NOTE: The TN response curve does not have 
+to be utilized for gray scale, in order to make a simpler 
+display, improve viewing angle, and use cheaper IC drivers; 
+the Apple Powerbook 170's TFTs (thin film transistors) drive 
+the TN response curve directly into region 3.  This gives all 
+the speed/contrast advantages of a TFT display and cheaper 
+manufacturing cost, but provides no gray scale. <p>    
+
+<strong> 1.25 The STN Liquid Crystal Response Curve</strong><p>
+ 
+The Key to understanding the STN curve is simply that due to 
+the addressing method applied, only a small amount of voltage 
+is available to change the LC material from transmittance to a 
+dispersion state. For this reason, the shape of the curve has 
+nearly a 90 degree shift between Zone I and Zone II regions; 
+in other words, it goes ballistic and nearly straight up !  
+This property allows the LC material to shift from white to 
+black at its threshold voltage (VT) without being concerned 
+with partial transmission (gray scale).  Furthermore, the 90 
+Degree curve shape means that gray scale is not available from 
+the LC material itself and the driving circuits must provide 
+the necessary fixes for levels of gray. 
+<p>
+STN displays inherently have a yellow on blue appearance 
+(anyone remember the old Zenith Laptops ?).  Because many 
+individuals found the yellow and blue appearance undesirable, 
+a number of techniques were developed to convert the STN image 
+to a black on white scheme.  DSTN, developed by Sharp 
+Corporation, was the first commercial black and white 
+conversion of the STN display and refers to Double Super 
+Twisted Nematic.  DSTN displays are actually two distinct STN 
+filled glass cells glued together. The first is a LCD display 
+as described previously, the second is a glass cell without 
+electrodes or polarizers filled with LC material for use as a 
+compensator which increases contrast and gives the black on 
+white appearance.  The drawbacks are a heavier module, a more 
+expensive manufacturing process, and a more powerful 
+backlighting system.
+<p>
+FCSTN is Film Compensated STN and is now the most commonly 
+used STN display technology on the market.  FSTN, monochrome 
+STN, and Polymer film STN are all standard STN displays with a 
+polymer film applied to the glass as a compensation layer 
+instead of the second cell as in the case of the DSTN. This 
+simpler and more importantly cost effective method provides 
+the preferred black on white image for this display 
+technology.  However,  once again, this design lowers the 
+transmittance of light and requires a more powerful back 
+lighting system.  
+<p>
+COMMONLY ASKED QUESTION NOTE:  Why are STN displays slow ?
+Due to the method used to address passive matrix (STN/DSTN)
+displays and the high density of pixels required for standard 
+VGA displays, the liquid crystal material must respond to an 
+extremely small change in voltage.  In developing these 
+materials for this voltage characteristic, there was a 
+reduction in the switching speed.  A slow display can best be 
+illustrated by the tendency of the cursor to "submerge" or 
+disappear when rapidly moved across the screen.  Another 
+common example is the blurring of images when they quickly 
+move across the display as in the case of high speed games.  A 
+fast display is less than 40 milliseconds, most STN type 
+displays are between 200 and 250 milliseconds.  However, some 
+new LC mixtures are reaching 150 millisecond speeds.   
+<p>
+COMMONLY ASKED QUESTION NOTE: What is Contrast ?
+Contrast is defined as the ratio of black to white, 
+more simply put, how black is black when next to a white or 
+clear pixel.   In terms of numbers, passive matrix LCDs are 
+usually able to produce a contrast ratio of  approximately 13 
+- 20:1; in real terms you get a set of different grays and 
+blues but no true blacks.
+<p>
+
+<pre>
+
+100%	^
+	|                      Figure 6
+T	|
+R	|    ********
+A	|            *
+N	|             *
+S	|<-Zone I----> *<-----------Zone II--------------------->
+M	|              *
+I	|              *
+T	|              *
+T	|              *     
+A	|             *
+N	|            *
+C	|           *
+E	|          *  
+	|          *
+	|          *
+	|          *
+	|           *
+	|	      **************************
+0%	------------------------------------------------------->
+			Vt Threshold Voltage
+	Applied Voltage
+</pre>
+	
+
+<strong>	1.3 Liquid Crystal Display Assembly</strong><p>
+
+Once the switching devices or electrodes have been fabricated 
+on the glass halves and the polyimide film has been applied & 
+rubbed, spacer balls (usually 4 to 8 micrometers [1 X 10 - 6 
+meters] in diameter) are sprayed on one half of the display.  
+Spacer balls are used to insure that the glass plates remain a 
+certain distance apart over the entire area of the display; 
+this is also known as cell gap.  If the cell gap is not 
+uniform, an image will appear different from one end of the 
+display to the other.  If the spacer balls are not applied 
+correctly, they will collect and the user will be able see 
+them as strange areas of non-uniform dust or distortion.  
+(Single spacer balls are too small to see and they are not 
+black dots.)  If the Display has a very large cell gap, when 
+you apply slight pressure to the display by touching it with 
+your finger, you will see the image change and the LC material 
+shift under the glass.  Doing this does not damage the 
+display, but take care when bringing any sharp objects, such 
+as pen or pencils, near the screen; it is very easy to damage 
+the polymer film and or polarizers on the display.   
+<p>
+The two glass panels are then aligned and glued
+together with an epoxy.  During panel assembly, if dirt is
+trapped between the two glass plates, you most likely will
+see these as annoying spots on the display.  During the
+application of the glue, one corner is left open. In a vacuum 
+chamber, the liquid crystal material
+is drawn into the display through the open corner.  Upon 
+completion, the remaining hole is filled with another epoxy.
+The LC material will align itself to the grooves in the 
+polyimide and spread out around the spacer balls.
+<p>
+After final assembly, excess glass is cut and driver ICs 
+are mounted.  The finished display is mounted onto a backlight 
+assembly (also known as an inverter assembly) and encased in 
+metal.  There are a number of methods for backlighting a LC 
+display.  STN displays usually have a side, top, or bottom 
+lighting system. In simple terms, this is where the 
+fluorescent tube is mounted.  For example, in a side-lit 
+display one or two fluorescent tubes will be located at the 
+left and or right edges of the display.  A fluorescent tube 
+normally 4 mm in diameter is used. This is dispersed by a 
+plastic plate around the entire area of the display.  A 
+dispersion plate looks like a white sheet with small holes; 
+each of the holes provides a small point of light.  On top of 
+the dispersion plate, a diffuser is placed.  A diffuser takes 
+the numerous points of light and uniformly spreads it out over 
+the entire area of the display.  The net effect 
+is providing a backlighting source around 4 or 5 mm thick !  
+<p>
+An Active matrix display, especially color modules, transmit 
+much less of the incident light and require more elaborate 
+backlighting systems.  An active matrix TFT display has a 
+matrix fabricated on one piece of glass; the metal lines and 
+transistor elements are not transparent and block a 
+significant percentage of light.  In order to obtain higher 
+contrast, newer displays incorporate what is called a black 
+matrix.  This is a black film that surrounds the pixel 
+elements (this can be on the matrix, but is usually around the 
+color filters); although this yields higher contrast, it also 
+reduces brightness.  Further complicating this, the polarizers 
+and the color filters reduce the output to less than 5% of the 
+incident light.  As a result, most backlighting systems 
+designed for active matrix based displays usually consist of 4 
+or 5 four mm tubes placed directly behind the display with a 
+diffuser plate to insure uniform irradiation. Therefore, they 
+are called backlit. This method of lighting makes the display 
+slightly larger, heavier, and greatly increases power 
+consumption.  The final metal encased display is called a 
+display module or sub-assembly and this is what the end user 
+or notebook manufacturer receives. 
+<p>
+<h2>References:</h2>
+<p>
+<pre>
+Solid State Technology, December 1988, page 65
+Amorphous Silicon Technology, Chapter 3 page 77
+High-resolution panels target laptop computers, EDN, April 23, 1992
+A. Miyaji, M. Yamaguchi, A. Toda, H. Mada, and S. Kobayashi, 
+Control and Elimination of Disclinations in Twisted Nematic 
+Liquid Crystal Displays, IEEE Trans. E. D. Vol. ED-24, No.7, 
+1977, pg. 811
+Kaneko, E., Liquid Crystal TV Displays: Principles and 
+Applications of Liquid Crystal Displays, KTK Scientific 
+Publishers
+Flat Panel Display 1993 (Japanese Publication) from Nikkei 
+Electronics
+Proceedings of SID; May 1993
+Various articles from SID Information Display and Electronic 
+Engineering Times Magazine
+</pre>
+
+<h2>Acknowledgments:</h2>
+<pre>
+I would like to thank Mike Schuster (SCHUSTER@PANIX.COM) for 
+commenting on clearness and general understanding while 
+compiling this FAQ.
+
+Written By Scott M. Bruck		SBRUCK@EM.DRL.MEI.CO.JP
+Matsushita Electric Industrial Co., Ltd.
+Liquid Crystal Display Development Center
+Development Group #1
+Moriguchi-Shi, Osaka 570 JAPAN
+
+In no way does this document represent the views or policies
+of Matsushita Electric Industrial Co., Ltd.
+
+Copyright 1992-93 by Scott M. Bruck, Osaka 573 Japan
+
+Copyright Notice:  This document is copyright by Scott M. 
+Bruck.  It may be distributed freely electronically in its 
+complete form including references and copyright notices.  
+This document may not be included in any publication without 
+written permission from the author.
+
+Every effort was made to insure the validity of this document.   
+<p></pre>
+
+<hr>
+<h2>LCD FAQ Part II: Addressing and Color Technology (Passive and 
+Active Matrix Displays)</h2>
+
+<strong>2.0 General Overview:</strong><p>
+ 
+Addressing describes the method employed to transfer charge 
+(data or the display image) from the outside world to the 
+display.  Unlike a CRT, which is just a surface of phosphors 
+scanned with a beam of electrons in a vacuum, a liquid crystal 
+display is an array of conductors with metal (or metal like) 
+lines running in both horizontal and vertical directions.  For 
+the case of a CRT, the electrons travel through a resistance 
+free medium (vacuum) and deliver a clear consistent signal. 
+The charge traveling through the metal lines of a LCD matrix 
+is affected by the properties of the metal.  As a result, the 
+magnitude and waveform of the applied charge can vary from one 
+end of the display to the other. This variation imposes 
+limitations on display quality and capabilities.
+<p>
+<strong>2.1 Addressing: Passive and Active Matrix Displays</strong><p>
+
+	There are distinct differences between active and 
+passive matrix displays, but two factors make the greatest 
+impact on potential customers.  Active matrix displays can 
+cost twice as much as an equivalent passive matrix display and 
+add more than $1000 to the cost of a notebook form-factor 
+computer.  However, active matrix displays produce a stunning 
+and bright image without ghosting or artifacts that rivals the 
+quality of CRTs.  Furthermore, even with the price 
+differential, manufacturers are able to sell every active 
+matrix color notebook they can produce.  
+<p>
+<strong>	2.11 Liquid Crystal Cell Charging</strong><p>
+ 
+	In general terms (regardless of display type), in order 
+to protect the liquid crystal material from deteriorating, 
+cells are addressed by alternating current (AC), not direct 
+current (DC).  There is no resultant charge in the LC material 
+following two addressing cycles; build up of charge in the LC 
+material will permanently damage it.  In other words, a 
+positive and then an equal but opposite negative charge is 
+applied to the LC material every other frame.  By applying 
+dual polarity addressing, the LC material changes twist 
+direction every other cycle and the net charge is zero.  
+Furthermore, since the liquid crystal material is changing 
+twist directions every other cycle, screen savers or screen 
+inverters are not required and in reality do absolutely 
+nothing.  Passive matrix displays utilize DIRECT ADDRESSING; 
+the charge is applied directly from the drivers to the pixel 
+element.  Active matrix displays utilize INDIRECT ADDRESSING; 
+the charge is "filtered" through a switch before reaching the 
+pixel element.
+<p>
+<strong>	2.12 Driving Methods: Passive Matrix Displays</strong><p>
+
+	Passive matrix displays have rows of electrodes on one 
+half of the display glass and columns of electrodes on the 
+other.  The electrodes are usually fabricated out of Indium 
+Tin Oxide (ITO), which is a semi-transparent metal oxide.  
+When the two pieces of glass are assembled into a display, the 
+intersection of a row and column form a pixel element.  
+Furthermore, if a pulse is sent down one row and a specific 
+column is grounded, the established electric field can change 
+the state of liquid crystal(from white to black). By repeating 
+this process (display scanning) an image can be formed on the 
+display.  Problems arise as the number of rows and columns 
+increase. With higher pixel density, the electrode size must 
+be reduced and the amount of voltage necessary to drive the 
+display rapidly increases.  Furthermore, higher driving 
+voltage creates a secondary problem; charging effects. Even 
+though only one row and column are selected, the liquid 
+crystal material near the row and column being charged are 
+affected by the pulse.  The net result is the pixel selected 
+is active (dark), but the areas surrounding the addressed 
+point are also partially active (grays).  The partially active 
+pixels reduce the display contrast and degrade image quality.     
+A final problem is the speed of the STN material, a display 
+must be able to react in less than 40 milliseconds for 
+performance similar to a CRT.  Most STN materials are between 
+150 and 250 milliseconds and can not switch from black to a 
+white image that quickly.  This problem results in 
+disappearing cursors and blurred images when high speed 
+graphics are utilized
+<p>
+COMMONLY ASKED QUESTION NOTE: What is STN Gray Scale ?
+As discussed in part I section 1.24, the STN curve does not 
+possess an intrinsic gray scale capability like the TN curve, 
+therefore driving methods have been developed to create the 
+illusion of true gray scale.  Gray scale can be derived from 
+frame-rate control and dithering/space modulation.  Frame-rate 
+control quickly switches on and off a pixel, the eye perceives 
+this as gray.  Dithering or space modulation is accomplished 
+by alternately keeping some pixels black and some white in a 
+checkerboard layout; when using this method, the layout is in 
+a random order.  If dithering is in a regular (repeating)  
+pattern, it is detectable by the human eye.  In real world 
+applications, combinations of both technologies are applied to 
+commercial displays.  The result, however, is sometimes wavy 
+or moving grays.  ( The image appears to be moving in waves or 
+a solid color appears to be in motion when a large area is set 
+to a specific gray level.) 
+<p>
+RECENT TECHNOLOGY NOTE: What are Dual Scan STN Displays ?
+This is simply taking currently made color STN displays and 
+applying some previously developed technology.  Back in the 
+late 1970's and early 1980's liquid crystal chemistry was not 
+as advanced and in order to build high data content displays, 
+manufacturers were forced to build two displays on one glass 
+plate.  A dual scan display utilizes similar technology.  
+Instead of running the columns down the entire display, they 
+are terminated in the center of the display, a small gap is 
+left, and the line is continued to the bottom of the display.  
+In reality, you now have two 640 X 240 displays on one glass 
+plate.  Therefore, if IC drivers are mounted on the top and 
+the bottom of the display, the charge must only travel half 
+the distance of a normal display.  As a result, the effects of 
+the contrast limitations discussed in section 2.12 can be 
+reduced.  The end result appears to be a brighter display, but 
+in reality it is  only improved contrast (the blacks appear 
+darker).  The dual scan STN display still suffers from the 
+ghosting and artifact problems inherent in all slow STN 
+displays.
+<p>
+<strong>	2.13 Driving Methods: Active Matrix Displays</strong><p>
+
+	In order to eliminate the problems of the STN/passive 
+matrix display, the active matrix display was developed.  
+Active matrix displays have a thin film Transistor or diode on 
+the glass substrate that indirectly addresses each pixel 
+element.  Depending on the display type, application, or 
+manufacturer, the TFT may be comprised of amorphous silicon 
+(a-Si) or polycrystalline silicon (p-Si),  The TFT  completely 
+isolates one pixel element from the others in the display and 
+eliminates the problem of partially active pixels.  Simply 
+put, the TFT acts as a switch ! When a row of TFTs are 
+addressed the gate lines are active-- the switch is turned on, 
+this allows charge to flow from the columns into the pixels 
+and set the image for the frame cycle.  Once a row has been 
+addressed, the gate line is reversed biased (the switch is 
+turned off) to insure that no charge can pass from the columns 
+into the pixel element.  Thus, the pixel is now completely 
+isolated as the rest of the display is addressed. The LC 
+material acts as a capacitor and stores charge.  After a 
+charge is placed on a liquid crystal cell ( the defined pixel 
+area), it begins draining similar to a discharging capacitor 
+(an exponential function).  As a result,  unless the display 
+can be written quickly (all 480 rows scanned and the return to 
+the top of the display to rescan starting from row 1 for a VGA 
+display) the image will not be uniform from the top to the 
+bottom of the display as the LC material starts to untwist.
+In order to insure charge storage for one frame and carefully 
+control charge on a pixel element, TFT displays incorporate a 
+second capacitor in parallel with the LC material. The 
+combined capacitance gives active matrix displays the 
+essential capability to accurately maintain the amount of 
+charge applied; thus reliable partial charges can be utilized 
+and gray scale or full color displays are possible.  With 
+proper drivers and high quality TFTs, 256 gray scales have 
+been obtained with quality that surpasses that of CRTs.  TN 
+material can also switch much faster than STN, thus 40 
+millisecond TFT displays are common yielding CRT like speed.  
+<p>
+COMMONLY ASKED QUESTION NOTE: What is cross Talk ?  Cross talk 
+is best described as the effect when a dark image (box or 
+widow shape) is placed in the middle of a white background.  
+Faint vertical and horizontal lines will be seen from the edge 
+of the window proceeding to the edges of the screen.  This can 
+be caused by poorly designed drivers or poorly made TFTs.  The 
+off selected TFTs are not completely off and some charge, very 
+strong at the edge of a window, has leaked into the pixels 
+creating the effect.  This is a common problem and is being 
+addressed by the manufacturers of TFT based displays.
+<p>
+<strong>2.2 Color Display Pixel Layout and Yields</strong><p> 
+
+In order to build a fully functional color VGA display, a TFT 
+LCD must have 480 X 640 X 3 pixel elements.  The 640 X 480 is 
+the well understood VGA pixel layout (640 X 400 for the Apple 
+Powerbook series and 640 X 480 for the 180c), except 640 red, 
+640 green, and 640 blue columns or stripes of color pixels are 
+now required.  This is a total of 921,600 TFTs that must work 
+in order to build a perfect display.  Using a semiconductor 
+analogy, it is similar to building a 1 Megabit DRAM on a 10 
+inch glass plate; not an easy task considering a particle 
+smaller than the diameter of the human hair can destroy a 
+single TFT.  Achieving a 100 % yield or a perfect display is 
+virtually impossible, thus even though manufacturer yields are 
+starting to reach 60% (for sellable devices) prices are very 
+high.  Furthermore, if 4 defective pixels are found on a color 
+VGA screen, this already represents a 99.99 % pixel yield-- 
+not bad for any process.  For the most part, the most common 
+pixel defect is caused by some form of contamination damaging 
+a TFT and preventing it from turning the pixel off (seen as 
+bright spots on a dark background).  There are two layouts for 
+pixels on TFT displays.  The most common for computer 
+applications is the STRIPE layout.  A stripe layout has 
+repeating stripes of red, green, and blue columns across the 
+display.  For multimedia and high density arrays (projection 
+LCD modules), a triad pixel layout is used.  A triad layout 
+has the three color sub-pixels in a triangle shape.  Figure 7 
+illustrates the difference between the two layouts.
+<pre>
+Figure 7: Color Pixel Layouts
+
+Stripe Layout				Triad Layout
+
+RGB	RGB	RGB 			 R     R     R
+RGB	RGB	RGB			G B   G B   G B
+
+Note: What is a color filter ?  A color filter works by 
+absorbing specific wavelengths of light and only passing light 
+of a certain wavelengths (In other words, a red filter will 
+remove all wavelengths of light except for red -- thus it 
+looks red !).  White light is made up of a spectrum of 
+wavelengths, so it can yield the red, green, and blue for 
+displays.  However, when filtering out the unwanted 
+wavelengths, the overall brightness is reduced.
+</pre>
+<p>
+COMMONLY ASKED QUESTION NOTE: What is a pixel ?
+Unfortunately, in most of the literature and magazines, there 
+is not a clear definition as to what a pixel is.  In its most 
+basic form, a pixel is described as one element on a display 
+screen.  For a monochrome screen this is an adequate 
+description.  However a color pixel is actually made up of 
+three subpixels:  a red, green, and blue pixel.  This is 
+sometimes called a pixel triad.  Therefore care must be taken 
+in describing pixels.  In terms of this document, a pixel is 
+the entire element consisting of red, green, and blue sub-
+elements.  A subpixel consists of the individual red, green, 
+or blue elements.  Gray scales for LC displays are always 
+calculated as a function of subpixels.  
+<p>
+<strong>2.3 Color Displays: Gray Scales and Bits </strong><p>
+
+	Due to the overall poor performance of Passive Matrix 
+color displays, only active matrix displays will be 
+specifically discussed. However, major points are applicable 
+to both display addressing technologies.  Unlike an analog 
+CRT, in a digital color TFT active matrix display, you 
+literally get what you buy...forever.  Even if you upgrade to 
+a new video driver or display card, you will still have the 
+same number of colors and gray scales.  The number of colors 
+is a direct result of the number of gray scales a display can 
+reproduce.  The standard VGA format is rated to display 256 
+colors, however it can select from a 18 BIT CLUT (color look 
+up table)  which means the choice of 262,144 colors(this 
+calculation is based on a bit calculation for a pixel triad -- 
+2 ^ 18 --- see later section on calculations).  Intrinsic gray 
+scale reproducibility for TFT displays is a result of two 
+factors: the quality of the driver ICs used on the display and 
+the resistance of the gate metal(the rows of the display).  
+The gate metal must carry a clear and undeformed pulse from 
+one end of the display to the other( 640 X 3 = 19200 lines).  
+If the pulse is not maintained the TN curve will not charge to 
+the desired level and the correct color can not be displayed.  
+Therefore, the more gray scales required, the greater the 
+control that must be exerted over the gate lines.  For 
+example, most displays sold today can display 256 colors out 
+of 4092 or 512.  The 256 colors is based on the VGA video 
+controller, the 4092 is a display limitation.  4092 possible 
+colors indicates that a display can reproduce 16 gray scales.  
+This is derived from 16 (red) X 16 (blue) X 16 (green) = 4092 
+possible colors.  Once again, dithering can be used to extend 
+this, but there are displays in limited production that can 
+reproduce 256 gray scales or more than 16 million colors !  
+Most current TFT color displays feature 3 bit drivers (where 2 
+raised to the third power yields 8); these drivers can produce 
+a total of 512 colors.  This is more than adequate unless 
+later on you decide you wish to pursue some multimedia 
+functions which require more than 32 levels of gray scale.  
+Although the controller and the computer may be fast enough to 
+handle the functions, 8 or 16 gray scales will be inadequate-- 
+your image will not be what you expect (It will look like a 
+collection of color shadows).  Sharp has recently demonstrated 
+10 inch 640 X 480 displays running on Apple Macintoshes 
+displaying 64 gray scales.  These 6 bit drivers are supposedly 
+entering production and will enter the commercial market 
+shortly.  The color reproduction of these displays is 
+excellent.
+<p>
+<strong>2.4 Understanding Digital Color Pixels </strong><p>
+
+	4 Bits, 8 Bits, 16 Bits, 24 Bits Just how many colors 
+can they actually generate ?  Digital video divides the number 
+of colors or gray scales into a distinct number of points.  
+Based on these "POINTS" the system can generate a fixed number 
+of colors or gray scales.  Manufacturers tend to play games 
+with numbers, so sometimes it is very difficult to understand 
+"BIT" color talk.  First of all, the bit system is based on 
+the binary system so: 1 Bit color, which is 2 raised to the 
+first power is 2.  In other words a black & white display 
+where the pixel has a state of being either on or off.  This 
+can currently be extended to 24 bits which (at 2 to the 24 
+power) yields more than 16 million gray scales.  OK, now that 
+we understand how gray scales are calculated, lets convert 
+this to a color display: Once again, manufacturers play a game 
+with numbers and here we introduce bpp or BITS PER PIXEL.  Now 
+depending on manufacturer, a pixel can be made up of 1 
+subpixel (the individual Red, Green, and Blue pixels) or can 
+be a composite of all three colors.  If we examine a 16bpp 
+system the following calculations are applicable:  2 raised to 
+the 16th power is: 65536.  So if the system is 16 bpp for the 
+combined primary colors, the system can produce a total of 
+65536 colors.  If the system produces 16 bpp for all three 
+colors then 65536 X 65536 X 65536 = 2.8 X 10^14 colors.  The 
+small table below summarizes the Bits confusion.   Triad Pixel 
+refers to a combination of the RED/GREEN/BLUE pixels.  
+Subpixel refers to the individual red, green, or blue pixel.  
+The number of gray scales for a monochrome display is always 
+the same as a triad calculation bpp display. The numbers 
+listed down the columns refer to how many gray scales or 
+colors that a system configuration can produce.  CRT based 
+color is usually calculated as the triad pixel calculation.
+<pre>
+Bits/Colors    Mono or Triad Pixel	Subpixel (R/G/B)
+1			2		8
+4			16		4096
+8			256		1.68X10^7
+16			65536		2.81X10^14
+24			1.68X10^7	4.72X10^21
+</pre>
+<p>
+COMMONLY ASKED QUESTION NOTE:   What is analog video ?  Unlike 
+digital or bit based video analog video is based on a 
+continuous flow of data.  The wave form can be thought of as a 
+continuous wave of points with the distance between points so 
+small that it is impossible to differentiate between them.  In 
+other words, it can theoretically provide an infinite number 
+of gray scales.  VGA is an analog system and VGA CRTs are 
+analog displays.  The advantage of an analog display is that 
+when you upgrade your video card and drivers to handle more 
+colors, your existing monitor should be able to operate with 
+the extended color ranges.  NEC makes an analog XVGA TFT LCD, 
+but due to power handling requirements, it is not suitable for 
+battery based portable computers.
+<p>
+COMMONLY ASKED QUESTION NOTE: Why are TFT Color Displays 
+Expensive ?  There are numerous reasons for this.  As 
+discussed above, displays with large numbers of defective 
+pixels can not be sold and as a result, yield is usually 
+thought to be the major problem.  In reality, one should be 
+aware that the largest cost of TFT displays are the materials 
+utilized for production.  Since Japanese manufacturers have 
+not standardized the size of displays yet, each manufacturer 
+has specific material needs (glass, holders for machines, 
+robots, and etc.).  This fact alone keeps display prices 
+extremely high since material and machine suppliers can not 
+make standard parts for an entire industry at this time. 
+<p>
+COMMONLY ASKED QUESTION NOTE: How many gray scales are 
+required for multimedia operations ?  Usually 64 gray scales 
+or more are required for true multimedia operations.  TFT LCDs 
+with 64 gray scales will probably be available in volume 
+within a year.  
+<p>
+COMMENT: Why are some color TFT displays much brighter than 
+others  ?  The brightness of a screen is determined by two 
+related factors; the size of the screen and the aperture ratio 
+of the pixels.  On the surface of an active matrix array 
+there are both pixels and electronics, as a result of the 
+opaque electronics, some of the area that light could pass 
+through is blocked.  The ratio of light passing through the 
+pixel to the entire area of the pixel and associated 
+electronics is called the aperture ratio.  The larger the 
+ratio is, the more light that can pass through the pixel and 
+the brighter the image on the display will be.  Furthermore, 
+if the display itself is bigger, there is more room for the 
+pixels and the result is more light passing through the 
+individual pixels.  For this reason, DTIs 10 inch display 
+found in the IBM Thinkpad 700c is much brighter than some of 
+the smaller 8.4 and 9.5 inch TFT displays.
+<p>
+<strong>2.4 Basic Principles of TFT Operation</strong> <p>
+ 
+	For all intensive purposes, a TFT can simply be 
+considered a switch; when selected (on) it allows charge to 
+flow through it and when off it acts as an barrier preventing 
+or at least restricting the flow of charge.  As mentioned 
+earlier, a TFT is a MOS FET device or a Metal Oxide 
+Semiconductor Field Effect Transistor.  The gate line can be 
+considered the "switch" of the transistor, with this you turn 
+it on, partially on, or off.  The Source and drain are the 
+entrance and exit, respectively, for the charge you want to 
+pass through the switch.  In the case of a display, this is 
+the charge that you want to appear on the pixel.  Looking at 
+Figure 7, source and drain metal electrodes are separated by 
+an amorphous silicon (a-Si) semiconductor layer; with the 
+absence of charge the a-Si layer acts as an insulator or 
+resistor and prevents the flow of charge from the source to 
+drain; thus isolating the pixel from the rest of the display.  
+SiNx or silicon Nitride is the gate insulator and forms the 
+gate dielectric; electrons do not pass from the gate line into 
+the transistor, but are used to influence the charge 
+distribution in the semiconductor layer.  A MOS FET that fits 
+this description (you turn it on)is called an enhancement 
+device.  When a positive charge is placed on the gate line, 
+electrons (or negatively charged particles) will begin to 
+collect in the area above the gate, on the other side of the 
+Silicon Nitride (SiNx) in the a-Si.  When the charge on the 
+gate is increased to a certain point, called the VT or 
+threshold voltage, enough electrons will have collected in the 
+a-Si to change it from an insulator to a conductor.  In other 
+words, you build up a channel of electrons, so if there are 
+electrons at the source (high) and nothing at the drain (low), 
+the electrons will begin to move through the electron filled 
+channel until the charge is the same at both sides or you turn 
+the transistor off.  The result is a charging of the pixel and 
+a change in the state of the liquid crystals.  The unique 
+aspect of this device is the nonlinear characteristics after 
+the TFT passes through Vt.  It exponentially moves to a 
+conduction state (usually 6 to 8 orders of magnitude) and 
+makes it very easy to turn a TFT on or off around the Vt 
+value.  For more information on MOS FET device operation, pick 
+up a book on Semiconductor Physics or Solid State Physics.  
+The above is only meant as a basic simplified description of 
+MOS device operation. 
+<p>
+
+<strong>2.5 TFT Connections</strong><p>
+
+	The gate line of the TFT determines whether or not the 
+TFT will pass a charge into the pixel.  These are controlled 
+by the row bus-lines.  On a standard VGA display, the gate 
+lines would be the 480 horizontal lines.  The source lines of 
+the TFT are connected to the column or data bus-lines.  These 
+lines provide the charge for the pixel or contain the data for 
+the image.  The drain lines of the TFT are directly attached 
+to the ITO pixel, this transfers the charge from the 
+semiconductor region into the pixel.  <p>
+<pre>
+
+Figure 7: Thin Film Transistor Cross Section
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^	^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	Source Metal	^	^	Drain Metal
+			^	^		
+		    $$$$$$$$$$$$$$$$$$
+		    $	SiNx	     $	
+	******************************************
+	*		a-Si	Semiconductor	 *		
+*********					 *************
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		~		SiNx	    ~
+		~    __________________     ~
+~~~~~~~~~~~~~~~~~   |		       |    ~~~~~~~~~~~~~~~~~~
+		    |	gate	       |
+___________________________________________________________
+
+			glass
+
+___________________________________________________________
+
+</pre><p>
+
+<h2>References:</h2>
+<pre>
+Solid State Technology, December 1988, page 65
+Amorphous Silicon Technology, Chapter 3 page 77
+High-resolution panels target laptop computers, EDN, April 23, 
+1992
+A. Miyaji, M. Yamaguchi, A. Toda, H. Mada, and S. Kobayashi, 
+Control and Elimination of Disclinations in Twisted Nematic 
+Liquid Crystal Displays, IEEE Trans. E. D. Vol. ED-24, No.7, 
+1977, pg. 811
+Kaneko, E., Liquid Crystal TV Displays: Principles and 
+Applications of Liquid Crystal Displays, KTK Scientific 
+Publishers
+Flat Panel Display 1993 (Japanese Publication) from Nikkei 
+Electronics
+Proceedings of SID; May 1993
+Various articles from SID Information Display and Electronic 
+Engineering Times Magazine
+</pre>
+<h2>Acknowledgments:</h2>
+<pre>
+I would like to thank Mike Schuster (SCHUSTER@PANIX.COM) for 
+commenting on clearness and general understanding while 
+compiling this FAQ.
+
+Please address any questions or comments to the EMAIL address 
+listed below:
+
+Written By Scott M. Bruck		SBRUCK@EM.DRL.MEI.CO.JP
+Matsushita Electric Industrial Co., Ltd.
+Liquid Crystal Display Development Center
+Development Group #1
+Moriguchi-Shi, Osaka 570 JAPAN
+
+In no way does this document represent the views or policies
+of Matsushita Electric Industrial Co., Ltd.
+
+
+Copyright 1992-93 by Scott M. Bruck, Osaka 573 Japan
+
+Copyright Notice:  This document is copyright by Scott M. 
+Bruck.  It may be distributed freely electronically in its 
+complete form including references and copyright notices.  
+This document may not be included in any publication without 
+written permission from the author.
+
+Every effort was made to insure the validity of this document.  
+</pre>
