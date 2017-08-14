@@ -20,8 +20,33 @@ m24128.pdf
   Without Chip Enable Lines
 
 m24256.pdf
+  ST M24256 and M24128
+  256/128 Kbit Serial I2C Bus EEPROM
+  Without Chip Enable Lines
+
 m24c64.pdf
+  ST M24C64 and M24C32
+  64/32 Kbit Serial I2C Bus EEPROM
+
 nm24c65.pdf
+  Fairchild Semiconductor
+  NM24C65
+  64K-Bit Extended 2-Wire Bus Interface
+  Serial EEPROM with Write Protect
+  March 1999
+
 nm24c65u.pdf
+  Fairchild Semiconductor
+  NM24C65U
+  NM24C65U
+  64K-Bit Serial EEPROM with Write Protect
+  2-Wire Bus Interface
+  August 1999
+
 pcf8583.pdf
-README
+  Philips PCF8583
+  Clock/calendar with 240 x 8-bit RAM
+  Product specification
+  Supersedes data of 1997 Mar 28
+  File under Integrated Circuits, IC12
+  1997 Jul 15
