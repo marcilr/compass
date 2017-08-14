@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Graphics Routines - Sprites and Bitmaps</title>
+  </head>
+
+  <body bgcolor="FFFFFF">
+  
+  <center>
+  <table noborder width=90%" align="middle">
+  <TR><TD>
+  
+    <h1>Graphics Routines - Sprites and Bitmaps</h1>
+    The compass monitor uses sprites to store and display bitmaps.  Sprites are used to display
+    alpha-numeric characters as well as special graphics. This page only has the theory behind my
+    implementation. If your'd like to see the actually 8052 assembly code please click 
+    <A HREF="../raymon">here,</A> and see the latest revision of raymon.asm for
+    the LCD and graphics routines. <BR><BR>
+    
+    Sprites are a rectangular set of pixels that make up a 
+    bitmap or part of an image. Sprites are defined by width and height, and the bits that 
+    make up the sprite.  Following is an example 5x9 sprite for a '2':<BR><BR>
+
+    <IMG SRC="pics/two.gif" align="left" hspace="10">
+    
+    Since the display I'm using has only two bit setting ON and OFF, each pixel can be represented 
+    by a binary 1 or 0.  The sprite can thus be encoded as a set of 1's and 0's (see graphic).
+    I needed to decide on an appropriate memory storage format. 
+    I decided to use the standard format that everybody else uses which is 
+    <b>linear sprite format</b>.  This format uses a linear array in which the first character
+    of the array stores the sprite's width and the second character stores the sprites height.
+    After these first two bytes the sprites bits are stored as a one dimensional array.<BR><BR>
+    The conversion from a two-dimensional structure to a linear array is intuitive. You 
+    start with the first row (row number zero) and then concatenate the second row to its end. 
+    You then concatenate the third row to the end of the list, then the fourth row, etc.  
+    Actually you can either contenate the rows (row-majored) or concatentate the columns (column-majored).
+    With the orientation I've writing to the LCD the row index (actually the column idex) is auto-incremented 
+    so to optimize writing to the display I opted to use row-majored arrays.
+    </P>
+
+   <P>
+    To store the data in program the linear arrow of bits must be broken into a word size
+    appropriate for the microcontroller which in the case of the 8051 is am 8-bit byte. The
+    graphic below shows how the linear array of bits is broken into 8-bit bytes and converted
+    to an array of decimal digits.  It should be noted the at 40 bits that comprises this
+    sprite nicely divide by 8 to make 5 bytes.  If an odd number of bits is encountered the
+    end of the array should be padded of 0's to the next multiple of eight, ie 8,16,24,32,...8*n<BR>
+    </P>
+    
+    
+    <table cellpadding=10 border=2 bgcolor="#FFFBF0" width="100%" align="middle">
+    <tr>
+      <td>
+        <IMG SRC="pics/array.gif">
+      </td>
+      <td>
+        And finally the actually 8052 assembly code to store 
+        the size and bytes that compose the sprite:<BR><BR> 
+<PRE>
+<B>sprite2:    .db     5,7,27,50,34,34,31</B>
+</PRE>    
+      </td>
+    </tr>
+    </table>
+    
+    <P>
+    Each graphic and character to be used requires its own sprite stored in memory. Using
+    5x7 pixel characters, the entire ASCII character set can be represented using 5*128=640 bytes.
+    Writing sprites to the display requires writing out the rows of the bitmap.
+    The bits offset of any individual row is easily calculated using:
+    </P>
+
+   <table cellpadding=10 border=2 bgcolor="#FFFBF0" width="100%" align="middle">
+     <tr><td valign=top>
+<PRE>
+<B>offset=row*row_length</B>    
+
+Where: <B>row</B> is the offset to calculate, 0,1,2,3,4,5,6,7 in this case.
+       <B>row_length</B> is the lengh of each row, in this case 5.
+</PRE>  
+
+     </td></tr>
+   </table>
+
+    <P>
+    Dividing the bit offset by 8 yields the first byte in the array in stored memory with that row's bits, handily the remainder
+    of this division is the number of left rotates to bring the start of the row into alignment.  It must be remembered
+    that a row may be longer than 8 bits so it may be necessary to read multiple bytes from stored memory.
+    </P>
+    
+    <table noborder>
+    <TR><TD align="left" valign="top">
+
+    <P>     
+       Writing data to the 64x100 pixel display was conceptually simple but the implementation was
+       not easy. There were several complications that made writing the code difficult.  First the 
+       <A HREF="../../parts/lcd">LM4064</A> word size is 8-bits, so writes to the LCD display must be 
+       one word (byte) at a time. For setting/clearing individual pixels this means the appropriate 
+       word must be read from the display, the appropriate bit updated, then written back to the display. 
+    </P>
+    <P>
+      Writing sprites or bitmaps to the display faces the same problems as setting pixels. 
+      I wanted the ability to place sprites anywhere in 
+      the x,y plane, not just on word boundaries. The example on the right shows the problem.  Notice that the 10x18 
+      graphic of a digit '2' spans two display pages. Notice that the 3 pixels to the right and left of the graphic need to 
+      be preserved when the sprite is written to the display.
+      To accomplish this I had to read the bytes 
+      from the display that will be overwritten, mask out the appropriate sections, logically OR the new data to 
+      be written, then write the data back to the display.  Since the display is entirely memory-mapped this 
+      can actually be done fairly quickly.
+    </P>
+    
+    <P>
+      I spent nearly two weeks implementing the routines to write sprites to the display.
+      This code was frustrating to write due to the stored memory and display alignment problems which require 
+      many bit munipulations. However, it is also some of the most satisfying code because 
+      I can now write graphics with ease and see the results immediately.
+    </P>
+    
+    </TD>
+    <TD>
+      <IMG SRC="pics/page_alignment.gif" align="right">
+    </TD>
+    </TR>
+    </TABLE>
+   
+    <table><tr><td>&nbsp;</td></tr></table>
+
+
+       <hr>
+    <address><a href="mailto:marcilr@saturn.math.uaa.alaska.edu">Raymond E. Marcil</a></address>
+    <!-- Created: Thu Feb 11 13:07:32 AKST 1999 -->
+    <!-- hhmts start -->
+    Last modified: Sat Mar 27 18:18:12 AKST 1999
+    <!-- hhmts end -->
+
+    </TD></TR>
+    </TABLE>
+    </center>
+
+ 
+  </body>
+</html>
