@@ -1,0 +1,131 @@
+<html>
+<head>
+<title>Calculating a Bearing</title>
+</head>
+<body bgcolor="FFFFFF">
+
+<center>
+<table noborder width="90%" align="middle">
+<tr><td>
+
+<table noborder>
+  <tr>
+    <td valing="middle">
+      <img src="pics/fancy_compass2.jpg">
+    </td>
+  <td valign="middle">
+    <H1>Calculating a Bearing</h1>
+  </tr>
+</table>
+
+    <P>
+    In the perfect environment the HMC2003 magnetic sensor would
+    not be affected by outside sources.  However the steel
+    protoboard on which the sensor resides and circuitry 
+    affect the output of the sensor.  Per the Honeywell
+    application note 
+    <A HREF="pdf/sae.pdf">Applications of Magnetoresitive
+    Sensors in Navigation Systems</A>. I was able to
+    compensate for the affects of the ferrous protoboard and
+    circuitry.
+    </P>
+    <P>
+    In order to get an accurate bearings, scale and offset factors
+    for the X and Y sensor readings must be established. The procedure
+    is as follows:
+    </P>
+    
+    1. Find maximum and minimum values for X and Y magnetic 
+    readings. With a bit of testing in the back yard away
+    from other ferrous sources I derived the following values:
+    
+<DIR>
+<PRE>
+Xmin=-5064   Xmax=3948
+Ymin=-1277   Ymax=6683
+</PRE>
+</DIR>
+    
+    2. Using these four values determine the X and Y scale
+    factors (Xsf,Ysf):
+
+<DIR>  
+<PRE>
+Xsf = 1 or (Ymax-Ymin)/(Xmax-Xmin)
+        whichever is greater
+           
+Ysf = 1 or (Xmax-Xmin)/(Ymax-Ymin)
+        whichever is greater
+    
+Hence:
+
+Xsf = (6683-(-1277))/(3948-(-5064))
+	 = (7960/9012)
+	 = .8833 this result is less than one so,
+Xsf = 1
+
+Ysf = (3948-(-5064))/(6683-(-1277))
+    = 9012/7960
+Ysf = 1.1322
+
+</PRE>
+</DIR>
+
+   <P>
+   3. Calculate offset correction values (Xoff,Yoff):
+   </P>
+
+<DIR>
+<PRE>
+Xoff = [(Xmax-Xmin)/2-Xmax]*Xsf
+     = [(3948-(-5064))/2-3948]*1
+Xoff = 558
+
+Yoff = [(Ymax-Ymin)/2-Ymax]*Ysf
+     = [(6683-(-1277))/2-6638]*1.1322
+Yoff = -3060
+</PRE>
+</DIR>
+
+    <P>
+    4. The (Xsf,Ysf) and (Xoff,Yoff) values are applied to
+    the (x,y) readindings from the AD converters as follows:
+    </P>
+
+<DIR>
+<PRE>
+Xvalue=Xsf*Xreading+Xoff
+Yvalue=Ysf*Yreading+Yoff
+</PRE>
+</DIR>
+
+	<P>
+	5. Once the (Xvalue,Yvalue) have been calculated a 
+	bearing to magnetic north can be found using arctangent:
+	</P>
+<DIR>
+<PRE>
+Azimuth=atan(Xvalue,Yvalue)
+</PRE>
+</DIR>
+	
+	<P>
+	6. Finally the magnetic deviation, about 27.5&deg; for
+	Anchorage is added to the Azimuth to get the final reading.
+	</P>
+
+
+      <hr>
+    <address><a href="mailto:marcilr@saturn.math.uaa.alaska.edu">Raymond E. Marcil</a></address>
+    <!-- Created: Fri Apr 14 18:18:12 AKST 2000 -->
+    <!-- hhmts start -->
+    Last modified: Tue May 2 18:18:12 AKST 2000
+    <!-- hhmts end -->
+
+
+</tr></td>
+</table>
+</center>
+
+</body>
+</html>
