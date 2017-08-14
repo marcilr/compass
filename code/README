@@ -1,0 +1,27 @@
+README
+Created Sun Aug 13 17:36:37 AKDT 2017
+Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
+
+
+Filelist
+========
+bearing.html
+
+dispatcher/
+
+fancy_compass2.jpg
+
+files/
+graphics/
+i2c
+int/
+io/
+math/
+memmap/
+misc/
+pdf/
+pics/
+raymon/
+sfr/
+timer/
+circular/
