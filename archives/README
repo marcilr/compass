@@ -9,6 +9,12 @@ disk_labels/
   Disk labels for cdrom
 
 as31_original.zip
+  Monitor for the digital compass project
+  Copyright 12/16/99
+  by Raymond E. Marcil
+  Written for Atmel AT89C52
+  Assembled with as31-16
+
 cordic.zip
 dio500.pdf
 flyer.doc
