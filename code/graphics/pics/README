@@ -17,9 +17,14 @@ lm4064display.psd
   Densitron LM4064 Display layout
 
 m.gif
+  3x3 matric of trigonometric functions
+  FIXME: Need better explanation than this
+
 needledraw.gif
+  Compass needle drawn on Densitron LM4064 Display
+
 needle.gif
-needle.gif.bin
+  Compass needle graphic
 
 page_alignment.gif
 page_alignment.psd
