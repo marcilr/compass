@@ -43,6 +43,17 @@ lcd_faq.html
   This FAQ should be printed in 9 POINT MONACO FONT
 
 needledraw.html
+  Graphics Routines - Drawing the Needle
+  With all the graphics primitives (putpixel, line, circle, sprite, etc.) written 
+  the next step was to draw the actual compass needle.  A lot of different methods
+  presented themselves for drawing the needle to the display. My first idea was to
+  create a bitmap of the compass needle then rotate all the individual points in
+  the bitmap to the correct orientation then write the new bitmap to the screen.
+  Given that the current needle is 47 pixels high and 13 pixels wide this would
+  mean 47x23=1081 rotation calculations each time the compass needle is drawn.
+  I decided this was too computationally expensive so I looked for a more efficient
+  way to draw the needle. 
+
 pixels.html
 rpt.html
 sprites.html
