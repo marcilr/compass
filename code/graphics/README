@@ -12,6 +12,14 @@ pdf/
   Portable Document Files
 
 bresenham.html
+  Graphics Routines - Bresenham's Line and Circle Algorithms
+  In addition to routines for setting individual pixels, and bitmaps to the display I also
+  needed routines to write lines and circles to the display for the compass needle.  A little
+  research revealed that one of the best methods to use is Bresenham's line-drawing algorithm.
+  "Brensenham's line-drawing algorithm (and its derivatives) is one of the most commonly used
+  algorithms today for describing a line on a raster device.  The algorithm was first published
+  in Bresenham's 1965 article Algorithm for Computer Control of a Digital Plotter It is now
+  widely used in graphics and electronic printing systems.
 
 bres.txt
   Bresenham's Line and Circle Algorithms <B3>
