@@ -1,0 +1,23 @@
+README
+Created Sun Aug 13 19:17:14 AKDT 2017
+Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
+
+
+Filelist
+========
+24xx64.pdf
+  Microchip 24AA64/24LC64
+  64K I2C CMOS Serial EEPROM
+
+at24c128_256.pdf
+  Atmel AT24C128 - 128K (16,384 x 8)
+  Atmel AT24C256 - 256K (32,768 x 8) 
+  2-wire Serial EEPROMS
+
+m24128.pdf
+m24256.pdf
+m24c64.pdf
+nm24c65.pdf
+nm24c65u.pdf
+pcf8583.pdf
+README
