@@ -13,6 +13,19 @@ bearing.html
   Sensors in Navigation Systems.[1]  I was able to compensate for the
   affects of the ferrous protoboard and circuitry.
 
+circular/
+  In some applications which require incoming data to be processed serially and data may come
+  in before the microcontroller can devote the cycles to processing it, the incoming data has
+  to be "buffered" (saved) for some period of time.  Ideally, the algorithms used for saving
+  and retrieving this data, as well as maintaining the buffer should be as simple and fast
+  executing as possible.  Like most problems, there are many ways of solving it, with one of
+  the best being the "circular buffer".
+
+  A circular buffer is a memory area that has been set aside for an index to store data and
+  another index to retrieve the data.  Once an index has reached the end of the buffer, it
+  is reset to the start of the buffer.  In this way, the buffer is "circular" in that it
+  never ends.
+
 dispatcher/
 
 fancy_compass2.jpg
