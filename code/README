@@ -64,6 +64,33 @@ int/
   trying to process the interrupt.
 
 io/
+  I/O Routines
+  The digital compass required numerous I/O routines to return characters, strings, integers,
+  and fixed point values. These routines proved invaluable during testing and developement.
+  The following table shows the I/O routines used in the Raymon monitor:
+
+  ARGC           Returns command line argument cound
+  ARGV           Returns specified command line argument
+  BIN8OUT        Write 8-bit value in binary in ACC
+  BIN16OUT       Write 16-bit value in binary in DPTR
+  BIN32OUT       Write 32-bit value in binary pointed to by R0
+  COUT           Write single character out in ACC
+  DEC8IN         Get 8-bit unsigned value in ACC
+  DEC8OUT        Write unsigned 8-bit value in ACC
+  DEC16OUT       Write unsigned 16-bit value in DPTR
+  DEC8SOUT       Write signed 8-bit value in ACC
+  DEC16SOUT      Write signed 16-bit value in DPTR
+  FOUTS          Write signed 16.16 value pointed to by R0
+  PHEX           Write 8-bit ACC value in hex
+  PHEX16         Write 16-bit DPTR value in hex
+  PRINT_STACK    Writes current value of stack pointer in hex
+  PSTR           Print string in program memory pointed to by DPTR
+  SEND_CRLF      Write carriage return/linefeed
+  SEND_SPACE     Write a single space
+  STROUT         Writes STR string variable
+  WRITE_PROMPT   Writes the "Raymon" prompt
+  WRITE_STR      Print string in RAM pointed to by R0
+
 math/
 memmap/
 misc/
