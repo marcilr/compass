@@ -16,9 +16,32 @@ as31_original.zip
   Assembled with as31-16
 
 cordic.zip
+  CORDIC Algorithms
+  o CO ordinate R otation D igital C omputer
+  o Initially for solving trigonometric problems for in-flight navigation instrumentations.
+  o Now used by calculators to evaluate elementary functions, such as natural
+    log, exponential, sin, cos, sqrt, etc.
+  o Calculators use decimal arithmetic to save the time required for decimal
+    to/from binary conversions.
+
 dio500.pdf
+  DIO-500
+  MULTI-I/O CARD
+  USER's MANUAL
+  Copyright 1992, by DFI Inc.
+
 flyer.doc
 flyer.pdf
+  Digital Compass Prototype Presentation
+  CS470 Applied Software Development
+  by Raymond E. Marcil
+  A presentation on the development of a solid state compass,
+  including hardware/software design, and algorithm implementation.
+  All students, staff, and faculty are invited to attend.
+CAS 118, Friday May 5                                       <=== Must have been in 2000
+  10:00AM to 12:00 noon
+See http://saturn.math.uaa.alaska.edu/~marcilr/compass/
+
 Index.doc
 Output.pdf
 Untitled-1.psd
