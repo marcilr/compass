@@ -1,0 +1,35 @@
+glossary.txt
+Created Sun Aug 13 18:32:23 AKDT 2017
+Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
+
+
+Glossary
+
+
+PSD - A .PSD file is a layered image file used in Adobe PhotoShop.  PSD, which stands
+      for Photoshop Document, is the default format that Photoshop uses for saving data.
+      PSD is a proprietary file that allows the user to work with the images' individual
+      layers even after the file has been saved.[1]
+
+      Photoshop definitely got it right with the PSD file format.  It saves the complete
+      state of a still-being-edited image so that you can close down and resume work later.
+      When working with images, you should always keep a PSD copy around in case you need
+      to make tweaks to the image later on.
+
+      The problem is that PSD is not an open format.  While PNGs, JPGs, and BMPs can be
+      opened in nearly every image editor out there, PSD is special ---  and it needs
+      special support. 
+      ...
+      GIMP should honestly be your first stop when trying to open and edit a PSD file for
+      free.  Not only is it the closest counterpart to Photoshop itself, but it's available
+      across Windows, Mac, and Linux, so you can learn it once and use it on all of your
+      systems.[2]
+
+
+Links
+=====
+[1] What is PSD? What Opens a PSD? File Format List from WhatIs.com
+    http://whatis.techtarget.com/fileformat/PSD-Adobe-Photoshop-default
+
+[2] The Best Ways to Open a PSD File Without Photoshop - MakeUseOf
+    http://www.makeuseof.com/tag/the-best-ways-to-open-a-psd-file-without-photoshop/
