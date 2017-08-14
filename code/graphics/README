@@ -12,8 +12,27 @@ pdf/
   Portable Document Files
 
 bresenham.html
+
 bres.txt
+  Bresenham's Line and Circle Algorithms <B3>
+  Written for the PC-GPE by Mark Feldman
+  e-mail address : u914097@student.canberra.edu.au
+  myndale@cairo.anu.edu.au
+
+  NOTE: Replaced unrecognized formatting codes in nano with "-" and "|".
+
 index.html
+  Graphics Routines
+  This section contains all the algorithms, assembly code, and reasoning behind
+  the graphics routines for the digital compass display.  Given that the primary
+  objective of the digital compass is to display a real-time representation of a
+  compass bearing this is an area where I dedicated a lot of development time.
+  o Setting and Clearing pixels
+  o Bresenham's Line & Circle Algorithms
+  o Sprites and Bitmaps
+  o 2D Point Rotation
+  o Drawing the Needle
+
 lcd_faq.html
 needledraw.html
 pixels.html
