@@ -1,0 +1,69 @@
+README
+Created Sun Aug 13 19:43:45 AKDT 2017
+Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
+
+
+Filelist
+========
+argc.asm
+  Returns command line argument cound
+
+argv.asm
+  Returns specified command line argument
+
+bin8out.asm
+  Write 8-bit value in binary in ACC
+
+bin16out.asm
+  Write 16-bit value in binary in DPTR
+
+bin32out.asm
+  Write 32-bit value in binary pointed to by R0
+
+cout.asm
+  Write single character out in ACC
+
+dec8in.asm
+  Get 8-bit unsigned value in ACC
+
+dec8out.asm
+  Write unsigned 8-bit value in ACC
+
+dec16out.asm
+  Write unsigned 16-bit value in DPTR
+
+dec8sout.asm
+  Write signed 8-bit value in ACC
+
+dec16sout.asm
+  Write signed 16-bit value in DPTR
+
+fouts.asm
+  Write signed 16.16 value pointed to by R0
+
+phex.asm
+  Write 8-bit ACC value in hex
+
+phex16.asm
+  Write 16-bit DPTR value in hex
+
+print_stack.asm
+  Writes current value of stack pointer in hex
+
+pstr.asm
+  Print string in program memory pointed to by DPTR
+
+send_crlf.asm
+  Write carriage return/linefeed
+
+send_space.asm
+  Write a single space
+
+strout.asm
+  Writes STR string variable
+
+write_prompt.asm
+  Writes the "Raymon" prompt
+
+write_str.asm
+  Print string in RAM pointed to by R0
