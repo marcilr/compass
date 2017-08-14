@@ -1,0 +1,243 @@
+<html>
+<head>
+<title>Central Dispatcher</title>
+</head>
+<body bgcolor="FFFFFF">
+
+<center>
+<table noborder width="90%" align="middle">
+<tr><td>
+
+<table noborder>
+  <tr>
+    <td valing="middle">
+      <img src="pics/fancy_compass2.jpg">
+    </td>
+  <td valign="middle">
+    <H1>Central Dispatcher</h1>
+  </tr>
+</table>
+
+<P>
+Commands can be issued to the compass via the serial port.  Whenever the 
+<A HREF="../int/index.html">serial interrupt handler</A> receives a carriage return
+the command flag is set indicating a command has been recieved. 
+Subsequently when main event loop finds the command flag set the central 
+dispatcher is called to process the command. In this way the interrupt
+handling is able to communicate with the main event loop. 
+The dispatcher gets the command from the input buffer and scans a 
+jump table for the command.  If the command is found the routine is 
+jumped to, otherwise an error is returned.  The dispatcher proved
+invaluable during developement.  I was able to code up test routines
+code in an entry in the jump table, then test the specific command.
+<P>
+
+<P>
+There wasn't much information available on coding up a 
+dispatcher for the 8052 available.  I did find 
+<I>Peter Norton's Assembly Language Book for the IBM PC</I> useful. 
+Particularly the dispatcher section section, pages 218-222, while this
+book is 8088 specific it did serve of as a basic concept guide.
+
+<P>
+Following is the 8052 assembly code for the central dispatcher.
+The first part parses the command, then searches the jump 
+table for the command name.  The second part is the jump 
+table with the command names and callable routines.
+In order to make the jump I use the <b>jmp @a+dptr</b> 
+8051/52 instruction.  This instruction jumps to the
+current value of the 16-bit DPTR register plus the Accumulator offset.
+So once I've found the command in the table I load it's address
+into DPTR then use <b>jmp @a+dptr</b> to jump to the routine.
+Routines can use standard argv() and argc() style functions 
+to get command line arguments.
+</P>
+<!===========Central Dispatcher Code================ -->
+
+   <table cellpadding=10 border=2 bgcolor="#FFFBF0">
+      <tr><td valign=top>
+<FONT face="courier" SIZE="2">
+<PRE>
+;--------------------------------------------------------;
+; This routine is the central dispatcher.                ;  
+; It searches the dispatch table for the command         ;
+; and calls the appropriate routine.                     ;
+;                                                        ;
+; INPUT:       rxhead      Points to head of command,    ;
+;                          Terminated by ASCII 0         ;
+; DESTROYS:    ACC, R0, R1, R2, DPTR                     ;
+;--------------------------------------------------------;
+dispatcher:
+   clr   comflag                 ; Clear command flag
+   mov   r0,rxhead               ; Get address of command
+   mov   comptr,rxhead           ; Get a copy in comptr for argv and argc
+   
+   lcall argc                    ; Get number of arguments and pointers to them  
+   jz   dispatch4                ; No arguments, then exit 
+   clr   a                       ; Get first argument
+   mov   r0,#str                 ; Get pointer to location for string
+   lcall argv                    ; Get command   
+   lcall ustring                 ; Convert string to upper case for comparison
+   mov   dptr,#dispatch_table    ; Get address of dispatch table
+   
+dispatch1:
+   clr   a                       ; Offset=0
+   movc  a,@a+dptr               ; Get char from dispatch table
+   jz    dispatch3               ; End of table? 
+   lcall strcmp                  ; Check this table entry
+   jz    dispatch2               ; Do we have a match?
+   
+   lcall init_rxbuf              ; Yes, clear the transmit buffer
+   lcall len                     ; Get offset to ljmp vector 
+   inc   a                       ; 
+   lcall util_adcad              ; Add offset to dptr
+    
+   clr   a                       ; Then hop to it
+   jmp   @a+dptr               
+   
+   
+; ====== This section finds the next entry
+
+dispatch2:
+   inc   dptr                    ; Point to next char
+   mov   a,#0x000h               ; Offset=0, since we're incrementing DPTR
+   movc  a,@a+dptr               ; Get char
+   jz    dispatch26              ; No? Then get next char
+   sjmp  dispatch2               ; Check next char
+
+dispatch26:
+   inc   dptr
+   inc   dptr                    ; Increment dptr to next entry
+   inc   dptr
+   inc   dptr
+   ljmp  dispatch1               ; Get next command from table   
+
+dispatch3:
+   lcall send_crlf               ; Send carriage return
+   mov   dptr,#notfound          ; Print out an error message
+   lcall pstr
+
+dispatch4:
+   lcall write_prompt
+   lcall init_rxbuf              ; Reinitialize receive buffer
+   ljmp  loop15                  ; Go back to main event loop.
+
+;   ret
+
+;============== Dispatch Table ====================================>
+;============== Dispatch Table ====================================>
+
+; The following table has the commands processed by the central 
+; dispatcher.  The format is the name (capitalized), terminated
+; by ASCII 0, followed by a long jump to the routine to be 
+; executed when the command is issued.
+
+dispatch_table: 
+   .db "GRINT",0
+   ljmp command_match
+   
+   .db "TRASH",0
+   ljmp command_match
+   
+   .db "CONV",0
+   ljmp command_conv
+
+   .db "CAL",0
+   ljmp command_cal
+
+   .db "PIN",0
+   ljmp command_read_pin
+   
+   .db "SP",0
+   ljmp command_sp
+   
+   .db "AC",0
+   ljmp command_ac
+   
+   .db "LCDINVERSE",0
+   ljmp command_lcd_inverse
+   
+   .db "LCDNORMAL",0
+   ljmp  command_lcd_normal
+   
+   .db "LCDWRITE",0
+   ljmp command_lcd_write
+   
+   .db "SCLK",0
+   ljmp command_sclk
+   
+   .db "DISPLAYON",0
+   ljmp command_display_on
+   
+   .db "DISPLAYOFF",0
+   ljmp command_display_off
+   
+   .db "CLR",0
+   ljmp command_lcd_clr
+   
+   .db "WRITE",0
+   ljmp command_write
+   
+   .db "PSET",0
+   ljmp command_pset
+   
+   .db "PCLR",0
+   ljmp command_pclr
+   
+   .db "GOTO",0
+   ljmp command_gotoxy
+   
+   .db "L",0
+   ljmp command_draw_line
+   
+   .db "COS",0
+   ljmp command_cos8
+   
+   .db "SIN",0
+   ljmp command_sin8
+   
+   .db "RPT",0
+   ljmp command_rpt
+   
+   .db "NEEDLE",0
+   ljmp command_needle
+   
+   .db "SR",0                                    
+   ljmp command_set_reset
+   
+   .db "SET",0
+   ljmp command_set
+   
+   .db "RESET",0
+   ljmp command_reset
+   
+;   .db "SETLOW",0
+;   ljmp command_set_low
+   
+;   .db "SETHIGH",0
+;   ljmp command_set_high
+   
+;   .db "RESETLOW",0
+;   ljmp command_reset_low
+   
+;   .db "RESETHIGH",0
+;   ljmp command_reset_high
+   .db 0
+</PRE>
+</td></tr>
+</table>
+
+      <hr>
+    <address><a href="mailto:marcilr@saturn.math.uaa.alaska.edu">Raymond E. Marcil</a></address>
+    <!-- Created: Fri Apr 14 18:18:12 AKST 2000 -->
+    <!-- hhmts start -->
+    Last modified: Tue May 2 18:18:12 AKST 2000
+    <!-- hhmts end -->
+
+
+</tr></td>
+</table>
+</center>
+
+</body>
+</html>
