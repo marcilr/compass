@@ -1,0 +1,21 @@
+README
+Created Sun Aug 13 19:36:01 AKDT 2017
+Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
+
+
+Filelist
+========
+extint0_timer0.gif
+  Digital Compass Project
+  Flowchart that illustrates the external interrupt 0 handler
+
+extint0_timer0.vsd
+  Digital Compass Project
+  Visio flowchart that illustrates the external interrupt 0 handler
+
+fancy_compass2.jpg
+  Digital compass graphic
+
+serial.gif
+  Flowchart that illustrates the serial inturrupt handler,
+  also shows the use of the mutexes I described previously.
