@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Graphics Routines - 2D Point Rotation</title>
+  </head>
+
+  <body bgcolor="FFFFFF">
+  
+  <center>
+  <table noborder width=90%" align="middle">
+  <TR><TD>
+
+  <H1>Graphics Routines - 2D Point Rotation</H1>
+  <P>
+  The virtual compass needle is draw to the display by connecting 
+  five points which define the compass needle.  The compass needle 
+  is rotated by rotating the five descrete points, that define the needle,
+  about its origin. 
+  <A HREF="bresenham.html">Bresenham's line-drawing algorithm</A>
+  is then used to connect the dots. To rotate the points I used
+  the standard 2D transformation as follows:
+  </P>
+  
+  <DIR>
+      x1=x*cos(a) - y*sin(a)<BR>                         
+      y1=x*sin(a) + y*cos(a) 
+  </DIR>
+  
+  <P>
+  I created a routine called RPT that takes an (x,y) coordinate as
+  input and rotates it an arbitrary number of degrees about the origin
+  using the above transformation.
+  Writing the rotation routine required the writing of several 
+  other support routines to do the math.  These 
+  routines include sin8 and cos8 which calculate a signed 8-bit 
+  sine and 8-bit cosine using a lookup table. I also wrote MUL8S
+  which does an 8-bit signed multiply and returns a 16-bit signed
+  result, as well as SUB16S which tasks two 16-bit signed values
+  and subtracts one from the other and returns a 16-bit signed result. 
+  </P>
+  
+
+  
+  <P>
+  One thing to be noted about sin8 and cos8 functions is that they break
+  the unit circle up into 256&deg;s not the traditional 360&deg;s.
+  This means when calling the RPT function it must be passed an angular
+  measurement in the range of 0-255, (ie 0&deg;=0, 90&deg;=64,
+  180&deg;=128, 270&deg;=192).
+  The benefit to breaking the circle up into 256&deg;s is the ability to save
+  an angle, 0-255, in a single byte. This makes for small fast lookup table.
+  Given the relatively low 
+  resolution of the LCD having only 256 discrete orientations 
+  for the compass needle is about right, additional resolution 
+  is not required. When is question or in doubt create your own angular
+  system:)
+  </P>
+  
+  
+  <!-- ============== 2D point rotation routine =============== -->
+
+<table noborder><tr><td>&nbsp;</td></tr></table>
+
+    
+    <FONT FACE="arial,helvetica" SIZE="2">
+       <B>2D Point Rotation Routine</B><BR>
+    </FONT>
+
+   <table cellpadding=10 border=2 bgcolor="#FFFBF0">
+      <tr><td valign=top>
+<FONT face="courier" SIZE="2">
+<PRE>
+
+;--------------------------------------------------------------;
+; This function takes a point (x,y) and rotates around         ;
+; the origin an arbitrary number of degrees (0-255)            ;
+;                                                              ;
+;                                                              ;
+; Created by: Raymond E. Marcil                                ;
+; E-mail: axrem@uaa.alaska.edu                                 ;
+; Date: April 10, 2000                                         ;
+;                                                              ;
+; Developed On: Atmel AT89C52                                  ;
+; Assembler:    AS31                                           ;
+;                                                              ;
+; INPUT:    r0,r1       Signed (x,y) points to rotate.         ;
+;           ACC         Number of degrees (0-255) to rotate.   ;
+; OUTPUT:               (x,y) rotated point.                   ;
+;                                                              ;
+; USES:     sin8,cos8,mul8s,mul8s                              ;
+;                                                              ;
+; MODIFIES: C           Carry Flag                             ;
+;                                                              ;
+; NOTES:    This function uses the basic 2D transformation:    ;
+;                                                              ;
+;              x1=x*cos(a) - y*sin(a)                          ;
+;              y1=x*sin(a) + y*cos(a)                          ;
+;--------------------------------------------------------------;
+rpt:
+   push  0x002
+   push  0x003
+   push  acc
+   push  b
+   push  dpl
+   push  dph
+   
+   mov   r2,a        ; Save a copy of the angle in R2
+
+; Calculate x1=x*cos(a)-y*sin(a)
+   
+   mov   a,r2        ; Get angle
+   lcall cos8        ; Get Cosine in ACC
+   mov   b,r0        ; Get X coordinate
+   lcall mul8s       ; Signed multiply
+   
+   mov   dpl,a       ; Save result in DPTR
+   mov   dph,b       ; DPTR:=x*cos(a)
+
+   mov   a,r2        ; Get angle
+   lcall sin8        ; Get Sine in ACC
+   mov   b,r1        ; Get Y coordinate
+   lcall mul8s       ; Signed multiply, AB=y*sin(a)
+
+   lcall sub16s      ; DPTR:=DPTR-AB, x1=x*cos(a) - y*sin(a)  
+
+; The next set of instructions do some bit
+; shifting which equates to dividing by 2^7
+; to account for the fixed point notation in the
+; cosine table. 
+
+   mov   a,dpl       ; Get low byte
+   rlc   a           ; Get high bit of DPL in C
+   mov   a,dph       ; Get high byte in ACC
+   rlc   a           ; Rotate MSB of low byte into LSB high byte
+   mov   acc.7,c     ; Capture sign bit
+   mov   r3,a        ; Save copy X1 in R3     
+   jc    rpt1        ; Negative? Yes, the continue
+   mov   a,dpl       ; Get low byte again
+   jnb   acc.6,rpt1  ; Check next lowest bit, 
+                     ; Zero? Yes then continue
+   inc   r3          ; No, then round X1 up 
+rpt1:
+ 
+; Calculate y1=x*sin(a) + y*cos(a)
+   mov   a,r2        ; Get angle
+   lcall sin8        ; Get Sine in ACC
+   mov   b,r0        ; Get X coordinate
+   lcall mul8s       ; Signed multiply
+   
+   mov   dpl,a       ; Save result in DPTR
+   mov   dph,b       ; DPTR:=y*sin(a)
+   
+   mov   a,r2        ; Get angle
+   lcall cos8        ; Get Cosine in ACC
+   mov   b,r1        ; Get Y coordinate
+   lcall mul8s       ; Signed multiply
+   
+; DTPR := DPTR + AB   
+   add   a,dpl       ; Add 'A' To DPL
+   mov   dpl,a       ; Move Result To DPL
+   mov   a,dph       ; Get DPH
+   addc  a,b         ; Add 'B' To DPH + CY
+   mov   dph,a       ; Move Back To DPH
+   
+; The next set of instructions do some bit
+; shifting which equates to dividing by 2^7
+; to account for the fixed point notation in the
+; cosine table. 
+
+   mov   a,dpl       ; Get low byte
+   rlc   a           ; Get high bit of DPL in C
+   mov   a,dph       ; Get high byte in ACC
+   rlc   a           ; Rotate MSB of low byte into LSB high byte
+   mov   acc.7,c     ; Capture sign bit
+   mov   r1,a        ; Save copy X1 in R3     
+   jc    rpt2        ; Negative? Yes, the continue
+   mov   a,dpl       ; Get low byte again
+   jnb   acc.6,rpt2  ; Check next lowest bit   
+   inc   r1          ; No, then round X1 up 
+rpt2:
+   mov   r0,0x003    ; x1->r0
+   
+   pop   dph
+   pop   dpl
+   pop   b
+   pop   acc
+   pop   0x003
+   pop   0x002
+   ret
+
+</PRE>
+</FONT>
+</TABLE>
+
+  <table><tr><td>&nbsp;</td></tr></table>
+
+
+
+    <HR>
+    <address><a href="mailto:marcilr@saturn.math.uaa.alaska.edu">Raymond E. Marcil</a></address>
+<!-- Created: Wed Apr 10 12:08:22 AKST 2000 -->
+<!-- hhmts start -->
+Last modified: Thu Apr 10 19:56:15 AKST 2000
+<!-- hhmts end -->
+ 
+ 
+  </TD></TR>
+  </TABLE>
+  </center>
+ 
+  </body>
+</html>
