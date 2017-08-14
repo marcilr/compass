@@ -15,6 +15,10 @@ as31_original.zip
   Written for Atmel AT89C52
   Assembled with as31-16
 
+circuit-diagram.png
+circuit-diagram.psd
+  Digital compass circuit diagram
+
 cordic.zip
   CORDIC Algorithms
   o CO ordinate R otation D igital C omputer
@@ -38,10 +42,13 @@ flyer.pdf
   A presentation on the development of a solid state compass,
   including hardware/software design, and algorithm implementation.
   All students, staff, and faculty are invited to attend.
-CAS 118, Friday May 5                                       <=== Must have been in 2000
+  CAS 118, Friday May 5                                       <=== Must have been in 2000
   10:00AM to 12:00 noon
-See http://saturn.math.uaa.alaska.edu/~marcilr/compass/
+  See http://saturn.math.uaa.alaska.edu/~marcilr/compass/
 
 Index.doc
-Output.pdf
-Untitled-1.psd
+Index.pdf
+  Digital Compass Prototype
+  CS470 Applied Software Development
+  NOTE: Created pdf using LibreOffice  Version: 4.3.3.2 Build ID: 430m0 (Build: 2)
+        on August 13, 2017 for easy viewing. 
