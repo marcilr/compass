@@ -63,5 +63,20 @@ needledraw.html
   way to draw the needle. 
 
 pixels.html
+  Graphics Routines - Setting and Clearing Pixels
+  The most basic graphic primitive is the ability to set or clear an individual
+  pixel given an (x,y) coordinate.  I'm using a 64 x 100 Densitron LM4064 display.
+  This display is boken up into eight pages numbered 0-7.  Each page being 8-bits
+  wide. There are one hundred 1-bit wide columns per page numbered 131-31.  Note
+  that the 0-7 page and 31-131 column numbering come from the how the SED1560
+  graphics controller is hardwired to the LCD (Liquid Crystal Display).  This may
+  sound confusing but it really doesn't matter how the graphics controller
+  references the LCD so long as appropriate (x,y) coordinate mapping takes place.
+  I decided to conveinently map the origin (0,0) to the lower left hand corner of
+  the screen.  Both the pset (pixel set) and pclr (pixel clear) routines map (x,y)
+  coordinates to the screen coordinates.  I though of making an independent
+  function to do this, but in the name of speed I built the mapping code right into
+  pset and pclr.
+
 rpt.html
 sprites.html
