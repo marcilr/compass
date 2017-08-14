@@ -1,0 +1,27 @@
+README
+Created Sun Aug 13 18:26:13 AKDT 2017
+Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
+
+
+Filelist
+========
+an-611.pdf
+  Bresenham's Line
+  Algorithm Implemented for
+  the NS32GX32
+  National Semiconductor
+  Application Note 611
+  Rick Pelleg
+  September 1989
+
+lm4064.pdf
+  LM4064
+  DENSITRON INTERNATIONAL PLC
+  100 X 64 PIXEL MINI-GRAPHIC ARRAY WITH EDGELIT LED
+  BACKLIGHT
+
+m1560.pdf
+  The SED1560 series is a single-chip LCD driver for dot-
+  matrix liquid crystal displays. It accepts serial or 8-bit
+  parallel display data directly from a microprocessor and
+  stores data in an on-chip 166 x 65-bit RAM.
