@@ -6,6 +6,12 @@ Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
 Filelist
 ========
 bearing.html
+  In the perfect environment the HMC2003 magnetic sensor would not be
+  affected by outside sources.  However the steel protoboard on which
+  the sensor resides and circuitry affect the output of the sensor.
+  Per the Honeywell application note Applications of Magnetoresitive
+  Sensors in Navigation Systems.[1]  I was able to compensate for the
+  affects of the ferrous protoboard and circuitry.
 
 dispatcher/
 
@@ -19,9 +25,19 @@ io/
 math/
 memmap/
 misc/
+
 pdf/
+  Portable Document Files
+
 pics/
+  Pictures
+
 raymon/
 sfr/
 timer/
 circular/
+
+Links
+=====
+[1] Applications of Magnetoresitive Sensors in Navigation Systems
+    pdf/sae.pdf
