@@ -42,7 +42,6 @@ dispatcher/
   dispatcher section section, pages 218-222, while this book is 8088 specific it did serve of
   as a basic concept guide.
 
-files/
 graphics/
 i2c
 int/
