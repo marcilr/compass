@@ -1,0 +1,541 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Graphics Routines - Bresenham's Line and Circle Algorithms</title>
+  </head>
+
+  <body bgcolor="FFFFFF">
+  
+  <center>
+  <table noborder width=90%" align="middle">
+  <TR><TD>
+
+  <H1>Graphics Routines - Bresenham's Line and Circle Algorithms</H1>
+  <P>
+  In addition to routines for setting individual pixels, and bitmaps to the display 
+  I also needed routines to write lines and circles to the display for
+  the compass needle. A little research
+  revealed that one of the best methods to use is Bresenham's line-drawing algorithm.
+  &quot;Brensenham's line-drawing algorithm (and its derivatives) is one of the most
+  commonly used algorithms today for describing a line on a raster device.  
+  The algorithm was first published in Bresenham's 1965 article <I>Algorithm for 
+  Computer Control of a Digital Plotter</I> It is now widely used in graphics and 
+  electronic printing systems.
+  </P>
+  <P>
+  Bresenham's line-drawing algorithm uses an iterative scheme. A pixel is plotted 
+  at the starting coordinate of the line, and each iteration of the algorithm 
+  increments the pixel one unit along the major, or x-axis.  The pixel is
+  incremented along the minor, or y-axis only when a decision variable 
+  (based on the slope of the line) changes sign.  A key feature of the 
+  algorithm is that it requires only integer data and simple arithmetic.
+  This makes the algorithm very efficient and fast.&quot;
+  (<A HREF="pdf/an-611.pdf">1</A>)
+  </P>
+
+  <P>
+    Following are the 8051/52 assembly language routines I developed for the 
+    Bresenham's line and circle algorithm. There is a lot of information 
+    available on the Brensenham's algorithms but I found short reference on 
+    <A HREF="bres.txt">Bresenham's Line and Circle Algorithms</A> by 
+    Mark Feldman readily digestable. I modeled my 
+    implementations on the easy to follow pseudocode. The only routine 
+    required by the line-drawing and circle routines is an output device
+    depended putpixel(x,y) routine. In my case I'm using a routine called
+    putpixelbuf(x,y) which puts an individual pixel into a fast pixel buffer 
+    to be written to the display. This code is generic enough that it could be
+    used for any 8051/52 application the needs a line drawing function.
+    All you need to do is create an appropriate putpixel(x,y) for your 
+    output device.
+  </P>
+
+  <!-- ============== Bresenham's line-drawing algorithm =============== -->
+
+<table noborder><tr><td>&nbsp;</td></tr></table>
+
+    
+    <FONT FACE="arial,helvetica" SIZE="2">
+       <B>Bresenham's Line-Drawing Algorithm</B><BR>
+    </FONT>
+
+   <table cellpadding=10 border=2 bgcolor="#FFFBF0">
+      <tr><td valign=top>
+<FONT face="courier" SIZE="2">
+<PRE>
+
+;-----------------------------------------------------------------;
+; This routine writes a line using Bresenham's algorithm.         ;
+;                                                                 ;
+; Created by: Raymond E. Marcil                                   ;
+; E-mail: axrem@uaa.alaska.edu                                    ;
+; Date: April 10, 2000                                            ;
+;                                                                 ;
+; Developed On: Atmel AT89C52                                     ;
+; Assembler:    AS31                                              ;
+;                                                                 ;
+; INPUT:       r2/r3          (x1,y1)     1st point               ;
+;              r4/r5          (x2,y2)     2nd point               ;
+;                                                                 ;
+; OUTPUT:      Writes line using putpixelbuf() routine.           ;
+;                                                                 ;
+; USES:        putpixelbuf()                                      ;
+;                                                                 ;
+; DESTROYS:    BANK 2         Bank 2 registers                    ;
+;              C              Carry Flag                          ;
+;                                                                 ;
+; BANK 2 registers:                                               ;
+;   R0=0x010, R1=0x011, R2=0x012, R3=0x013                        ;
+;   R4=0x014, R5=0x015, R6=0x016, R7=0x017                        ;
+;                                                                 ;
+; Register Usage:                                                 ;
+;  R6          d                                                  ;
+;  R7          numpixels                                          ;
+;  BANK2 R0    dinc1                                              ;
+;  BANK2 R1    dinc2                                              ;
+;  BANK2 R2    xinc1                                              ;
+;  BANK2 R3    xinc2                                              ;
+;  BANK2 R4    yinc1                                              ;
+;  BANK2 R5    yinc2                                              ;
+;  BANK2 R6    deltax                                             ;
+;  BANK2 R7    deltay                                             ;
+;-----------------------------------------------------------------;
+bres:
+   push  0x006
+   push  0x007
+   push  acc
+   push  b
+   
+; Calculate deltax := abs(x2 - x1);
+   mov   a,r4           ; Get x2
+   clr   c              ; Clear for subb
+   subb  a,r2           ; ACC:=x2-x1
+   jnc   bres1          ; Positive? Then continue
+   mov   a,r2           ; Get x1
+   clr   c              ; Clear for subb
+   subb  a,r4           ; ACC:=x1-x2
+bres1:
+   mov   0x016,a        ; Save deltax in BANK2 R0
+
+; Calculate deltay := abs(y2 - y1);
+   mov   a,r5           ; Get y2
+   clr   c              ; Clear for subb
+   subb  a,r3           ; ACC:=y2-y1
+   jnc   bres2
+   mov   a,r3           ; Get y1
+   clr   c              ; Clear for subb
+   subb  a,r5           ; ACC:=y1-y2
+bres2:
+   mov   0x017,a        ; Save deltay in BANK2 R1
+
+; IF deltax >= deltay THEN:
+   mov   a,0x016        ; Get deltax
+   clr   c              ; Clear for subb
+   subb  a,0x017        ; ACC:=deltax-deltay
+   jc    bres3          ; deltax < deltay go to else
+
+; Calculate numpixels=deltax+1
+   mov   a,0x016        ; Get deltax
+   inc   a              ; ACC:=deltax+1
+   mov   r7,a           ; Save numpixels in r7
+   
+; Calculate d := (2 * deltay) - deltax
+; Note: deltay must be strickly less than 128!
+;       also the result from this could be negative
+   mov   a,0x017        ; Get deltay
+   rl    a              ; ACC:=2*deltay
+   mov   b,a            ; Save 2*deltay in B
+   mov   a,0x016        ; Get deltax
+   cpl   a              ; Get 2's complement
+   inc   a
+   add   a,b            ; ACC:=(2*deltay)-deltax
+   mov   r6,a           ; Save d in R6
+   
+; Calculate dinc1 := deltay Shl 1
+   mov   a,0x017        ; Get deltay
+   rl    a              ; ACC:=deltay Shl 1
+   mov   0x010,a        ; Save dinc1 in BANK2 R0
+
+; Calculate dinc2 := (deltay - deltax) shl 1;
+   mov   a,0x016        ; Get deltax
+   cpl   a              ; Get 2's complement
+   inc   a  
+   add   a,0x017        ; ACC:=deltay-deltax
+   clr   c              ; Clear carry for rotate
+   rlc   a              ; ACC:=(deltay-deltax) shl 1
+   mov   0x011,a        ; Save dinc2 in BANK2 R1
+   
+   mov   0x012,#1       ; xinc1:=1 save in BANK2 R2
+   mov   0x014,#0       ; yinc1:=0 save in BANK2 R4
+   
+   sjmp  bres4          ; Jump over else portion
+
+; ELSE deltax<delta:
+bres3:
+
+; Calculate numpixels=deltay+1
+   mov   a,0x017        ; Get deltay
+   inc   a              ; ACC:=deltay+1
+   mov   r7,a           ; Save numpixels in r7
+   
+; Calculate d := (2 * deltax) - deltay
+; Note: deltax must be strickly less than 128!
+;       also the result from this could be negative
+   mov   a,0x016        ; Get deltax
+   rl    a              ; ACC:=2*deltax
+   mov   b,a            ; Save 2*deltax in B
+   mov   a,0x017        ; Get deltay
+   cpl   a              ; Get 2's complement
+   inc   a
+   add   a,b            ; ACC:=(2*deltax)-deltay
+   mov   r6,a           ; Save d in R6
+
+; Calculate dinc1 := deltax Shl 1
+   mov   a,0x016        ; Get deltax
+   rl    a              ; ACC:=deltax Shl 1
+   mov   0x010,a        ; Save dinc1 in BANK2 R0
+
+; Calculate dinc2 := (deltax - deltay) shl 1;
+   mov   a,0x017        ; Get deltay
+   cpl   a              ; Get 2's complement
+   inc   a  
+   add   a,0x016        ; ACC:=deltax-deltay
+   clr   c              ; Clear carry for rotate
+   rlc   a              ; ACC:=(deltax-deltay) shl 1
+   mov   0x011,a        ; Save dinc2 in BANK2 R1
+
+   mov   0x012,#0       ; xinc1:=1 save in BANK2 R2
+   mov   0x014,#1       ; yinc1:=0 save in BANK2 R4
+
+bres4:
+   mov   0x013,#1       ; xinc2:=1 save in BANK2 R3
+   mov   0x015,#1       ; yinc2:=1 save in BANK2 R5
+
+
+; IF x1 > x2 THEN
+  mov    a,r4           ; Get x2
+  clr    c              ; Clear for subb
+  subb   a,r2           ; Get x1
+  jnc     bres5         ; If x2>=x1? then jump
+  
+; xinc1 := - xinc1
+   mov   a,0x012        ; Get xinc1
+   cpl   a              ; Get 2's complement
+   inc   a
+   mov   0x012,a        ; Save back
+
+; xinc2 := - xinc2 
+   mov   a,0x013        ; Get xinc2
+   cpl   a              ; Get 2's complement
+   inc   a
+   mov   0x013,a        ; Save back
+   
+bres5:
+
+; IF y1 > y2 THEN
+  mov    a,r5           ; Get y2
+  clr    c              ; Clear for subb
+  subb   a,r3           ; Get y1
+  jnc    bres6         ; If y2>=y1? Then jump
+  
+; yinc1 := - yinc1
+   mov   a,0x014        ; Get xinc1
+   cpl   a              ; Get 2's complement
+   inc   a
+   mov   0x014,a        ; Save back
+
+; yinc2 := - yinc2 
+   mov   a,0x015        ; Get yinc2
+   cpl   a              ; Get 2's complement
+   inc   a
+   mov   0x015,a        ; Save back
+
+; Start drawing at (x1,y1)
+bres6:
+   mov   xpos,r2        ; x:=x1
+   mov   ypos,r3        ; y:=y1
+
+; Draw pixels
+bres7:
+   lcall put_pixel_buf
+;   lcall lcd_pixel_set
+   mov   a,r6           ; Get d
+   jnb   acc.7,bres8    ; Get sign of d
+                        ; Positive?
+
+; d := d + dinc1
+   mov   a,r6           ; Get d
+   add   a,0x010        ; Add dinc1
+   mov   r6,a           ; Save back
+   
+; x := x +xinc1
+   mov   a,xpos         ; Get x
+   add   a,0x012        ; Add xinc1
+   mov   xpos,a         ; Save back
+
+; y := y + yinc1
+   mov   a,ypos
+   add   a,0x014        ; yinc1
+   mov   ypos,a         ; Save back
+   
+   djnz  r7,bres7
+   sjmp  bres_exit
+bres8:
+
+; d := d + dinc2
+   mov   a,r6           ; Get d
+   add   a,0x011        ; Add dinc2
+   mov   r6,a           ; Save back
+   
+; x := x + inc2
+   mov   a,xpos         ; Get x
+   add   a,0x013        ; Add xinc2
+   mov   xpos,a         ; Save back
+
+; y := y + yinc
+   mov   a,ypos         ; Get y
+   add   a,0x015        ; Add yinc2
+   mov   ypos,a         ; Save back
+
+   djnz  r7,bres7
+
+bres_exit:
+
+   pop   b
+   pop   acc
+   pop   0x006
+   pop   0x007
+   ret
+
+</PRE>
+</FONT>
+</TABLE>
+
+
+<table noborder><tr><td>&nbsp;</td></tr></table>
+
+<!-- ============== Bresenham's Circle Algorithm ================= -->
+
+    <FONT FACE="arial,helvetica" SIZE="2">
+       <B>Bresenham's Circle Algorithm</B><BR>
+    </FONT>
+
+   <table cellpadding=10 border=2 bgcolor="#FFFBF0">
+      <tr><td valign=top>
+<FONT face="courier" SIZE="2">
+<PRE>
+
+;-----------------------------------------------------------------;
+; This routine writes a circle using Bresenham's circle           ;
+; algorithm.                                                      ;
+;                                                                 ;
+; Created by: Raymond E. Marcil                                   ;
+; E-mail: axrem@uaa.alaska.edu                                    ;
+; Date: April 10, 2000                                            ;
+;                                                                 ;
+; Developed On: Atmel AT89C52                                     ;
+; Assembler:    AS31                                              ;
+;                                                                 ;
+; INPUT:       (r0,r1)        Origin of circle.                   ;
+;              ACC            Radius of circle                    ;
+;                                                                 ;
+; OUTPUT:      Writes line using putpixelbuf() routine.           ;
+;                                                                 ;
+; USES:        putpixelbuf()                                      ;
+;                                                                 ;
+; DESTROYS:    C              Carry flag                          ;
+;                                                                 ;
+; REGISTER USAGE:                                                 ;
+;     R2    x                                                     ;
+;     R3    y                                                     ;
+;     R6    d                                                     ;
+;-----------------------------------------------------------------;
+circle:
+   push  0x002
+   push  0x003
+   push  0x006
+   push  acc
+   
+; Initializations:
+   
+   mov   r2,#0             ; X:=0
+   mov   r3,a              ; Y:=RADIUS
+   
+; d:=3-(2*RADIUS)
+   rl    a                 ; ACC:=2*RADIUS 
+                           ; (radius must be less than 128)
+   cpl   a                 ; Get 2's complement
+   inc   a
+   add   a,#3              ; ACC:=3-(2*RADIUS)
+   mov   r6,a              ; Save in R6
+
+circle1:   
+
+; Write (CenterX + X, Center Y + Y)
+   mov   a,r2              ; Get x
+   add   a,r0              ; ACC:=Centerx+x
+   mov   xpos,a            ; Save to xpos
+   mov   a,r3              ; Get Centery
+   add   a,r1              ; ACC:=Centery+y
+   mov   ypos,a            ; Save to ypos
+   lcall lcd_pixel_set
+
+; Write (CenterX + X, Center Y - Y), uses xpos from previous
+   mov   a,r3              ; Get y
+   cpl   a                 ; Get 2's complement
+   inc   a
+   add   a,r1              ; ACC:=Centery-y
+   mov   ypos,a
+   lcall lcd_pixel_set
+   
+; Write (CenterX - X, Center Y + Y)
+   mov   a,r2              ; Get x
+   cpl   a                 ; Get 2's complement
+   inc   a
+   add   a,r0              ; ACC:=Centerx-x
+   mov   xpos,a            ; Save to xpos
+   mov   a,r3              ; Get y
+   add   a,r1              ; ACC:=Centery+y
+   mov   ypos,a            ; Save to ypos
+   lcall lcd_pixel_set   
+
+; Write (CenterX - X, Center Y - Y), uses xpos from previous
+   mov   a,r3              ; Get y
+   cpl   a                 ; Get 2's complement
+   inc   a
+   add   a,r1              ; ACC:==Centery+y
+   mov   ypos,a            ; Save to ypos
+   lcall lcd_pixel_set
+
+; Write (CenterX + Y, Center Y + X)
+   mov   a,r3              ; Get Y
+   add   a,r0              ; ACC:=Centerx+y
+   mov   xpos,a            ; Save to xpos
+   mov   a,r2              ; Get x
+   add   a,r1              ; ACC:=Centery+x
+   mov   ypos,a
+   lcall lcd_pixel_set
+
+; Write (CenterX + Y, Center Y - X), use xpos from previous
+   mov   a,r2              ; Get x
+   cpl   a                 ; Get complement
+   inc   a
+   add   a,r1              ; ACC:=Centery-x
+   mov   ypos,a
+   lcall lcd_pixel_set
+   
+; Write (CenterX - Y, Center Y + X)
+   mov   a,r3              ; Get Y
+   cpl   a                 ; Get 2's complement
+   inc   a
+   add   a,r0              ; ACC:=Centerx-y
+   mov   xpos,a            ; Save to xpos
+   mov   a,r2              ; Get x
+   add   a,r1              ; ACC:=Centery+x
+   mov   ypos,a
+   lcall lcd_pixel_set
+   
+; Write (CenterX - Y, Center Y - X), use xpos from last
+   mov   a,r2              ; Get x
+   cpl   a                 ; Get 2's complement
+   add   a,r1              ; ACC:=Centery-x
+   mov   ypos,a            ; Save to ypos
+   lcall lcd_pixel_set
+
+   mov   a,r6              ; Get d
+   jnb   acc.7,circle2     ; Get sign bit, jump if positive
+
+; d is negative so:  d:=d+(4*x)+6
+   
+   mov   a,r2              ; Get x
+   rl    a                 ; x:=x*4 (shift left twice)
+   rl    a   
+   anl   a,#11111100b      ; Mask out low bits
+   add   a,#6              ; ACC:=(4*x)+6
+   add   a,r6              ; ACC:=d+(4*x)+6
+   mov   r6,a              ; Save new d
+
+   inc   r2                ; Increment x
+
+   mov   a,r3              ; Get y
+   clr   c                 ; Clear carry for subtraction
+   subb  a,r2              ; ACC:=Y-X
+   jnc   circle1           ; x<=y? Yes, then loop
+
+   sjmp  circle_exit
+
+circle2:                   
+
+; d is positive so:  d := d + 4 * (x - y) + 10
+;                    y := y - 1;
+   
+   mov   a,r3              ; Get Y
+   cpl   a                 ; Get 2's complement
+   inc   a
+   add   a,r2              ; ACC:=(X-Y)
+   rl    a                 ; ACC:=4*(X-Y)
+   rl    a
+   anl   a,#11111100b      ; Mask out 2 low bits
+   add   a,#10             ; ACC:=4*(X-Y)+10
+   add   a,r6              ; ACC:=d+4*(X-Y)+10
+   mov   r6,a              ; Save new d
+
+   inc   r2                ; Increment x
+   mov   a,r3              ; Get y
+   add   a,0x0FF           ; Y:=Y-1
+   mov   r3,a
+
+   clr   c                 ; Clear carry for subtraction
+   subb  a,r2              ; ACC:=Y-X
+   jnc   circle1           ; x<=y? Yes, then loop
+
+circle_exit:
+
+   pop   0x006
+   pop   0x003
+   pop   0x002
+   pop   acc
+   ret
+
+</PRE>
+</FONT>
+</TABLE>
+
+  <table><tr><td>&nbsp;</td></tr></table>
+
+    <P>
+    <FONT FACE="arial,helvetica" SIZE="2">
+       <B>Technical/Apps sheets:</B><BR>
+    </FONT>
+    <FONT FACE="arial,helvetica" SIZE="1">
+        (1) <A HREF="pdf/an-611.pdf">Bresenham's Line Algorithm implemented
+        for NS32GX32</A>
+        - National Semiconductor document that details Bresenham's Algori
+        in assembly language.<BR>
+    </FONT>
+    </P>
+
+    <P>
+    <FONT FACE="arial,helvetica" SIZE="2">
+       <B>Links:</B><BR>
+    </FONT>
+    
+    <FONT FACE="arial,helvetica" SIZE="1">
+        (1) <A HREF="http://www.geocities.com/SiliconValley/Lakes/7139/">
+          Graphics Primitives</A> - Pseudo-code for Bresenham's line-drawing 
+          algorithm for circles.<BR>
+    </FONT>
+
+    <hr>
+    <address><a href="mailto:marcilr@saturn.math.uaa.alaska.edu">Raymond E. Marcil</a></address>
+    <!-- Created: Thu Feb 11 13:07:32 AKST 1999 -->
+    <!-- hhmts start -->
+    Last modified: Fri Apr 21 18:18:12 AKST 1999
+    <!-- hhmts end -->
+
+  </TD></TR>
+  </TABLE>
+  </center>
+
+ 
+  </body>
+</html>
