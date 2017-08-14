@@ -54,6 +54,15 @@ i2c
   etc. to be connected to computers and microcontrollers.
 
 int/
+  The digital compass is interrupt driven.  The AT89C52 microcontroller has several vectored
+  interrupt handlers that process routine events.  One thing that confused me when I was first
+  writing interrupt routines was how to ensure that resources, like the circular buffers, are
+  not accessed simultaneous by different routines.  This sounds simple and the solution pretty
+  easy.  The trick is to use mutexes, single bit flags that indicate a resource is being used.
+  In this way routines can set a mutex bit to lock a resource so the interrupt handlers know
+  that a particular resource is in use and should return control to the main program before
+  trying to process the interrupt.
+
 io/
 math/
 memmap/
