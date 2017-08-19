@@ -1,0 +1,193 @@
+<html>
+<head>
+   <title>8051 Programming</title>
+</head>
+<body bgcolor="FFFFFF">
+
+<H1>8051 Programming</H1>
+
+<B>Registers</B><BR>
+
+<!-- 8051 Register Descriptions=================================== -->
+
+<P>
+<TABLE BORDER CELLPADDING=2>
+  <TR bgcolor="olive drab"><TD align="middle" COLSPAN=3>IE (Interrupt Enable) Register</TD></TR>
+  <TR>
+    <TD align="middle">Bit</td>
+    <TD align="middle">Label</TD>
+    <TD align="middle">Description</TD>
+  </TR>
+
+  <TR>
+    <TD align="middle">0</TD>
+    <TD align="middle">EXT0</td>
+    <TD>INT 0 pin interrupt enable</TD>
+  </TR>
+
+  <TR>
+    <TD align="middle">1</TD>
+    <TD align="middle">ET0</TD>
+    <TD>Timer 0 overflow interrupt enable</TD>
+  </TR>
+
+  <TR>
+    <TD align="middle">2</TD>
+    <TD align="middle">EX1</TD>
+    <TD>INT 1 interrupt enable</TD>
+  </TR>
+  
+  <TR>
+    <TD align="middle">3</TD>
+    <TD align="middle">ET1</TD>
+    <TD>Timer 1 overflow interrupt enable</TD>
+  </TR>
+  
+  <TR>
+    <TD align="middle">4</TD>
+    <TD align="middle">ES</TD>
+    <TD>Serial port interrupt enable</TD>
+  </TR>
+
+  <TR>
+    <TD align="middle">5-6</TD>
+    <TD align="middle">-</TD>
+    <TD>Reserved for additional interrupt hardware</TD>
+  </TR>
+  
+  <TR>
+    <TD align="middle">7</TD>
+    <TD align="middle">EA</TD>
+    <TD>Global interrupt enable</TD>
+  </TR>
+</TABLE>
+</P>
+
+<TABLE NOBORDER><TR><TD>&nbsp</TD></TR></TABLE>
+
+<!-- SCON (Serial Control) register ============================================ -->
+
+<P>
+<TABLE BORDER CELLPADDING=2>
+  <TR bgcolor="olive drab">
+    <TD align="middle" COLSPAN=4>
+      SCON (Serial Control) Register
+    </TD>
+  </TR>
+  <TR>
+    <TD align="middle">Bit</td>
+    <TD align="middle">Label</TD>
+    <TD align="middle">Bit Address</TD>
+    <TD align="middle">Description</TD>
+  </TR>
+
+  <TR>
+    <TD align="middle">0</TD>
+    <TD align="middle">RI</td>
+    <TD align="middle">98h</TD>
+    <TD>Receive Flag. Set when a byte has been completely received</TD>
+  </TR>
+
+  <TR>
+    <TD align="middle">1</TD>
+    <TD align="middle">TI</TD>
+    <TD align="middle">99h</TD>
+    <TD>Transmit Flag. Set when a byte has been completely transmitted</TD>
+  </TR>
+
+  <TR>
+    <TD align="middle">2</TD>
+    <TD align="middle">RB8</TD>
+    <TD align="middle">9Ah</TD>
+    <TD>Receive bit 8. The 9th bit received in mode 2 and 3</TD>
+  </TR>
+  
+  <TR>
+    <TD align="middle">3</TD>
+    <TD align="middle">TB8</TD>
+    <TD align="middle">9Bh</TD>
+    <TD>Transmit bit 8. The 9th bit to transmit in mode 2 and 3</TD>
+  </TR>
+  
+  <TR>
+    <TD align="middle">4</TD>
+    <TD align="middle">REN</TD>
+    <TD align="middle">9Ch</TD>
+    <TD>Receiver Enable. This bit must be set in order to receive characters</TD>
+  </TR>
+
+  <TR>
+    <TD align="middle">5</TD>
+    <TD align="middle">SM2</TD>
+    <TD align="middle">9Dh</TD>
+    <TD>Mutliprocessor Communications Enable</TD>
+  </TR>
+  
+  <TR>
+    <TD align="middle">6</TD>
+    <TD align="middle">SM1</TD>
+    <TD align="middle">9Eh</TD>
+    <TD>Serial port mode bit 1</TD>
+  </TR>
+  
+  <TR>
+    <TD align="middle">7</TD>
+    <TD align="middle">SM0</TD>
+    <TD align="middle">9Fh</TD>
+    <TD>Serial port mode bit 0</TD>
+  </TR>
+
+</TABLE>
+
+<BR>
+Additional data for SM0 &amp; SM1:
+  <TABLE BORDER=1>
+
+  <TR>
+    <TD><B>SM0</TD>
+    <TD><B>SM1</B></TD>
+    <TD><B>Serial Mode</B></TD>
+    <TD><B>Explanation</B></TD>
+    <TD><B>Baud Rate</B></TD>
+  </TR>
+  <TR ALIGN=CENTER>
+    <TD>0</TD>
+    <TD>0</TD>
+    <TD>0</TD>
+    <TD>8-bit Shift Register</TD>
+    <TD>Oscillator / 12</TD>
+  </TR>
+  <TR ALIGN=CENTER>
+    <TD>0</TD>
+    <TD>1</TD>
+    <TD>1</TD>
+    <TD>8-bit UART</TD>
+    <TD>Set by Timer 1 (*)</TD>
+  </TR>
+  <TR ALIGN=CENTER>
+    <TD>1</TD>
+    <TD>0</TD>
+    <TD>2</TD>
+    <TD>9-bit UART</TD>
+    <TD>Oscillator / 32 (*)</TD>
+  </TR>
+  <TR ALIGN=CENTER>
+    <TD>1</TD>
+    <TD>1</TD>
+    <TD>3</TD>
+    <TD>9-bit UART</TD>
+    <TD>Set by Timer 1 (*)</TD>
+  </TR>
+  <TR ALIGN=CENTER>
+    <TD colspan=5>
+      *Note: Baud rate doubled if PCON.7 (SMOD) is set
+    </TD>
+  </TR>
+</TABLE>
+</CENTER><P>
+
+
+</body>
+</html>
+
+
