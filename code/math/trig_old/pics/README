@@ -1,0 +1,25 @@
+README
+Created Sat Aug 19 13:04:01 AKDT 2017
+Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
+
+
+Filelist
+========
+arctan.gif
+  Think taylor series for atam
+
+  See: A Taylor series for the function arctan
+       http://www.mathstat.concordia.ca/faculty/rhall/mc/arctan.pdf
+
+cos.gif
+  Taylor series for cosine
+
+empty.gif
+  Empty gif image
+
+sin_factored.gif
+  Factored Taylor series for sine
+
+sin.gif
+  Taylor series for sine
+
