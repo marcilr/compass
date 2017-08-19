@@ -1,0 +1,13 @@
+links.txt
+Created Sat Aug 19 08:41:06 AKDT 2017
+Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
+
+
+Compass related links
+
+
+Links
+=====
+8051 Architecture Microcontroller
+Home > Products > Microcontrollers > 8051 Architecture
+http://www.atmel.com/products/microcontrollers/8051architecture/default.aspx
