@@ -5,6 +5,9 @@ Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
 
 Filelist
 ========
+cordic/
+  CORDIC routines for 16-bit SIN, COS, ATAN
+
 fixedpoint/
   16.16 Fixed Point Routines
 
@@ -25,12 +28,9 @@ fixedpoint/
   subtract functions were relatively easy to right. But the multiply and divide routines were a
   bear.  I learned quite a bit about restoring binary division.
 
-trig_old
-
-cordic/
-  CORDIC routines for 16-bit SIN, COS, ATAN
-
 index.html
   Math functions
+
+trig_old/
 
 sincos8.html
