@@ -11,3 +11,6 @@ Links
 8051 Architecture Microcontroller
 Home > Products > Microcontrollers > 8051 Architecture
 http://www.atmel.com/products/microcontrollers/8051architecture/default.aspx
+
+Compass project
+https://github.com/marcilr/compass
