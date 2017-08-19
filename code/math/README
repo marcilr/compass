@@ -32,5 +32,12 @@ index.html
   Math functions
 
 trig_old/
+  Trigonometry Functions        
+  Originally I had planned to implemented sine, cosine, and arctan using
+  Taylor Series. Towards the end of the project I discovered a much more
+  efficient method for calculating these functions these functions using
+  CORDIC.  These routines use only shifts and rotates to calculate values
+  and are extremely efficient on microcontrollers.   I include the
+  information here on Taylor Series only as a reference.
 
 sincos8.html
