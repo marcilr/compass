@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Trigonometry Functions</title>
+  </head>
+
+  <body bgcolor="FFFFFF">
+  
+    <CENTER>
+    <table noborder width="90%" align="middle">
+    <tr><td>
+  
+
+  
+    <h1>Trigonometry Functions</h1>
+    
+    <CENTER>
+ <TABLE WIDTH="100%" BORDER CELLPADDING=16 CELLSPACING=0>
+  <TR>
+   <TD BGCOLOR="#FEFFE6">
+    <TABLE WIDTH="100%" CELLPADDING=0 CELLSPACING=0 BORDER=0>
+     <TR>
+      <TD>
+        
+    <B>Note:</B> Originally I had planned to implemented sine, cosine, and arctan using 
+      Taylor Series. Towards the end of the project I discovered a much more efficient method for 
+      calculating these functions these functions using 
+      <A HREF="../cordic/index.html">CORDIC</A> routines. These routines use
+      only shifts and rotates to calculate values and are extremely efficient on microcontrollers. 
+      I include the information here on Taylor Series only as a reference. 
+    
+      </TD>
+     </TR>
+     <TR>
+      <TD ALIGN=RIGHT>
+        -- Ray
+      </TD>
+     </TR>
+    </TABLE>
+   </TD>
+  </TR>
+ </TABLE>
+</CENTER>
+
+    
+    <P>
+    The majority of the compasses time is spent converting data
+    to a bearing use trig functions.  At first I considered using
+    lookup tables.  With 16-bit data this would mean 2^16 possible
+    bearings or 65,536 possible headings.  I realize I would only need
+    to calculate trig functions for one quadrant but this is still 16,384
+    bearings.  However even with tricks I saw no way to make the 
+    lookup table small enough considering my total memory will
+    be between 10-20kb.  
+    </P>
+    <P>
+    This means I need to calculate the Sine, Cosine, and ArcTangent
+    functions.  I remembered using Taylor series from the old CalcII days.
+    This looked like a promising method to approximate the trig functions.  
+    I started by using the Mathematica to derive Taylor series for the 
+    three functions I need (remember computers are meant to do the work 
+    for you).
+    </P>
+    <P>
+    The Mathematica command looks something like this:
+    <B> Series[Sin[x],{x,0,15}] </B>Mathematica will happily kick out as 
+    many terms as desired.  I arrived at the following Taylor series:
+    </P>
+
+    <IMG SRC="pics/sin.gif"><BR>
+    <IMG SRC="pics/cos.gif"><BR>
+    <IMG SRC="pics/arctan.gif"><BR>
+
+    <P>
+    The above series nicely calculate the trig functions but
+    they are rather "math intensive." Note the number of exponents and
+    factorials- not good.  I decided to try factoring the Taylor series
+    to see if I could find any any repetition I could easily exploit.
+    The following factorization of the Sin[x] series shows how each term
+    in the series has the previous term as a factor.  This can 
+    Significantly cut down on the number of calculations needed to 
+    evaluate the series.
+    </P>
+      
+    <IMG SRC="pics/sin_factored.gif">
+
+    <P>
+    And finally a short C function that implements the above 
+    factorization:
+    </P>
+
+    <P>
+    <FONT FACE="courier">
+   /*<BR>
+    *<BR>
+    * This function calculates an approximation<BR>      
+    * of Sin[x] using a Taylor Series.<BR>           
+    *<BR>                                  
+    * INPUT:     x          Angle in radians.<BR>   
+    * OUTPUT:    Sin[x]<BR>              
+    *<BR>
+    */<BR>
+    float Sin(float x){<BR>
+    <DIR>
+       float y,x2;<BR>
+       float term1,term2,term3,term4;<BR>
+    <P>
+       x2=x*x;<BR>
+       term1=x2*x/6;<BR>
+       term2=(term1/20)*x2;<BR>
+       term3=(term2/42)*x2;<BR>
+       term4=(term3/72)*x2;<BR>
+       y=x-term1+term2-term3+term4;<BR>
+    </P>
+       return(y);<BR>       
+    }
+    </DIR>
+    </FONT>
+
+    <h3>Gregory's Formula for arctan(t)</h3>
+ 
+    In 1672, <a href="http://www-groups.dcs.st-and.ac.uk/~history/Mathematicians/Gregory.html">
+    James Gregory</a> (1638-1675) wrote about the Taylor series for 
+    calculating 
+    the angle given the tangent <b>t</b> for angles up to 45&#176;<br>
+    <div align=CENTER>
+    <table bgcolor="FFCCCC">
+      <tr><TD>
+        <table cellpadding=0 cellspacing=4 BORDER=0>
+          <tr><td rowspan=3> arctan(t) = t </td>
+              <td rowspan=3><font size=5>-</font> </td>
+              <td align=CENTER >t<sup>3</sup></td>
+              <td rowspan=3> + </td>
+              <td align=CENTER>t<sup>5</sup></td>
+              <td rowspan=3> <font size=5>-</font> </td>
+              <td align=CENTER>t<sup>7</sup></td>
+              <td rowspan=3> + </td>
+              <td align=CENTER>t<sup>9</sup></td>
+              <td rowspan=3> <font size=5>-</font> <sup>...</sup> </td>
+          </tr>
+          <tr> 
+              <td bgcolor="000000">
+                 <img src="pics/empty.gif" width=13 height=1></td>
+              <td bgcolor="000000">
+                 <img src="pics/empty.gif" width=13 height=1></td>
+              <td bgcolor="000000">
+                 <img src="pics/empty.gif" width=13 height=1></td>
+              <td bgcolor="000000">
+                 <img src="pics/empty.gif" width=13 height=1></td>
+          </tr>
+          <tr>
+              <td align=CENTER> 3 </td>
+              <td align=CENTER> 5 </td>
+              <td align=CENTER> 7 </td>
+              <td align=CENTER> 9 </td>
+           </tr>
+       </table>
+    </TD></TR>
+    </TABLE>
+    </div>
+
+    <P>
+    The above series <b>converges</b> provided that 
+    -1 <u>&lt;</u> t <u>&lt;</u> 1.  Trouble is, the Taylor 
+    series for atan converges <i>very slowly</i> for values of <b>t</B> 
+    near one or tan(45&#176;), and it
+    converges <i>extremely</i> slowly when <b>t</b> equals one. <BR>
+    Millions if not billions of terms may be required. 
+
+    <P>
+    <b>Not a good method.</b>
+    </P>
+
+    <P>
+       Above section from:
+       <A HREF="http://www.mcs.surrey.ac.uk/Personal/R.Knott/Fibonacci/fibpi.html#arctan">http://www.mcs.surrey.ac.uk/Personal/R.Knott/Fibonacci/fibpi.html#arctan</A>
+    </P>
+
+    <hr>
+    <address><a href="mailto:marcilr@saturn.math.uaa.alaska.edu">Raymond E. Marcil</a></address>
+<!-- Created: Wed Feb 17 23:45:41 AKST 1999 -->
+<!-- hhmts start -->
+Last modified: Thu Feb 18 14:41:08 AKST 1999
+<!-- hhmts end -->
+
+  </td></tr>
+  </table>
+  </center>
+  
+  </body>
+</html>
