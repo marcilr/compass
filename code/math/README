@@ -1,0 +1,36 @@
+README
+Created Sat Aug 19 12:38:00 AKDT 2017
+Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
+
+
+Filelist
+========
+fixedpoint/
+  16.16 Fixed Point Routines
+
+  Data from the digital compass A/D converators is pulled down as 16-bit values.  For many of the
+  trigonometry calculations I needed accurate signed values.  I first looked at using one of the
+  many available floating point packages available for the 8051/52 including a pretty good one
+  from Intel called FP-52.  Floating point is great if you have a dedicated FPU for the task but
+  on an 8-bit microcontroller using floating point values doesn't make a lot of sense.  I decided
+  the floating point libraries were just too big and slow.  I did some research and discovered
+  fixed point math.  I did some research and discovered fixed point math. I decided 16.16 fixed
+  point would do the trick.  The 16.16 describes how many bits are before and after the decimal
+  point.  This would give me a range of values from -32768.0000 to 32767.9999, this should be
+  sufficient for all the compass needs.  There are numerous fixed point routines available for
+  the stock standard 486 and Pentium masses but I was hard pressed to find a 16.16 fixed point
+  library for the 8051/52, that I didn't have to buy of course.
+
+  I wrote my own signed 16.16 fixed point library for the 8052.  The complement, shift, add, and
+  subtract functions were relatively easy to right. But the multiply and divide routines were a
+  bear.  I learned quite a bit about restoring binary division.
+
+trig_old
+
+cordic/
+  CORDIC routines for 16-bit SIN, COS, ATAN
+
+index.html
+  Math functions
+
+sincos8.html
