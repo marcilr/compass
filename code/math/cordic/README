@@ -12,13 +12,54 @@ pics/
   Pictures
 
 files/
-  Assembly files
+  atan.asm
+    ATAN - Signed 16.16 fixed point (32-bit) atan function.
+
+  cordic.asm
+    SIN/COS - Signed 16.16 fixed point (32-bit) sin/cos function.
 
 cordic.c
+  https://people.ece.cornell.edu/land/courses/ece4760/Math/cordic.c
+
 cordic_code.html
+  CORDIC Algorithm Simulation Code
+  
+  CORDIC algorithms.
+  The original code was published in Docter Dobbs Journal issue ddj9010.
+  The ddj version can be obtained using FTP from SIMTEL and other places.
+   
+  Converted to ANSI-C (with prototypes) by P. Knoppers, 13-Apr-1992.
+  file:///home/marcilr/git/projects/compass/code/math/cordic/cordic_code.html
+
 cordic_refs.html
+  References on CORDIC Methods
+
+  The "must-have" reference is the Volder one, it seems to be the original work.
+  The Zoran Corporation technical note talks about magnitude and phase computation
+  with CORDIC methods, but is probably impossible to find.  Cowan & Grant have a
+  section of a chapter on CORDIC methods illustrating several kinds of CORDIC calculations
+
+  https://www.taygeta.com/cordic_refs.html
+
 cordic_tut.html
+  CORDIC tutorial
+  CORDIC (COordinate Rotation DIgital Calculation) finds the sine or cosine of an angle
+  iteratively, using only simple math operations such as add, subtract, compare, shift,
+  and table lookup.
+  http://geezer.wz.cz/embed/cordic.htm
+
 FixedPointTrig.zip
+
 index.html
+  CORDIC Routines for SIN, COS, ATAN
+
+  The digital compass uses standard trigonometry including SIN, COS, and ATAN
+  to take the raw x,y,z sensor data and convert to a bearing like 127.56'.132"
+  Oiginally I had looked at using Taylor Series to calculate the trig functions.
+  However, upon actually trying to implement the fuctions using Taylor Series
+  I quickly found they did not converge quickly enough and were too computationally
+  expensive especially on an 8-bit microcontroller.  I did some research and
+  discovered CORDIC (COordinate Rotation DIgital Computer).
+
 math11.html
 sidebar.html
