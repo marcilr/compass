@@ -3,6 +3,9 @@ Created Sun Aug 20 17:46:31 AKDT 2017
 Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
 
 
+CORDIC Routines for SIN, COS, ATAN
+
+
 Filelist
 ========
 atan.asm
