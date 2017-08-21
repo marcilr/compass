@@ -1,0 +1,24 @@
+README
+Created Sun Aug 20 17:39:54 AKDT 2017
+Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
+
+
+Filelist
+========
+pdf/
+  Portable Document Files
+
+pics/
+  Pictures
+
+files/
+  Assembly files
+
+cordic.c
+cordic_code.html
+cordic_refs.html
+cordic_tut.html
+FixedPointTrig.zip
+index.html
+math11.html
+sidebar.html
