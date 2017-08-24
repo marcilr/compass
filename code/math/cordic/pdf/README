@@ -1,0 +1,44 @@
+README
+Created Thu Aug 24 15:47:11 AKDT 2017
+Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
+
+
+Filelist
+========
+97asap.pdf
+  Efficient Implementation of Rotation Operations
+  for High Performance QRD-RLS Filtering
+  by Bruno Haller <haller@nari.ee.ethz.ch>,
+  Jurgen Gotze <Juergen.Goetze@nws.e-technik.tu-muenchen.de>,
+  Joseph R. Cavallaro <cavallar@ece.rice.edu>
+  Published in Proc. ASAP '97 , Zurich, Switzerland, July 14{16, 1997, pp. 162{174.
+  (Received ASAP '97 Best Paper Award)
+
+  In this contribution we present practical techniques for implementing Givens rotations
+  based on the well-known CORDIC algorithm.  Rotations are the basic operation in many
+  high performance adaptive filltering schemes as well as numerous other advanced signal
+  processing algorithms relying on matrix decompositions.
+
+asilomar_final.pdf
+  A Novel CORDIC Rotation Method for Generalized Coordinate Systems 
+  Martin Kuhlmann, Keshab K. Parhi
+  Dept. of Electrical and Computer Engineering
+  University of Minnesota, Minneapolis MN 55455, USA
+  Email: {kuhlmann, parhi}@ece.umn.edu
+
+icassp95.pdf
+  A COMPLEX ARITHMETIC DIGITAL SIGNAL PROCESSOR
+  USING CORDIC ROTATORS
+  S. Freeman and M. O'Donnell
+  Electrical Engineering and Computer Science Department
+  and Bioengineering Program
+  University of Michigan
+  Ann Arbor, MI 48109
+
+sips_99final.pdf
+  A High-Speed CORDIC Algorithm and
+  Architecture for DSP Applications 
+  Martin Kuhlmann, Keshab K. Parhi
+  Dept. of Electrical and Computer Engineering
+  University of Minnesota, Minneapolis MN 55455, USA
+  Email: {kuhlmann, parhi}@ece.umn.edu
