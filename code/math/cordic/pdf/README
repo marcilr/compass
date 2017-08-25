@@ -65,3 +65,19 @@ sips_99final.pdf
   Dept. of Electrical and Computer Engineering
   University of Minnesota, Minneapolis MN 55455, USA
   Email: {kuhlmann, parhi}@ece.umn.edu
+
+Volder_CORDIC.pdf
+  The CORDIC Trigonometric Computing Technique
+  Jack E. Volder
+  Copyright 1959 by The Institute of Radio Engineers, Inc.
+  (now The Institute of Electrical and Electronics Enginers, Inc.)
+  Reprinted, with permission, from IRE Trans. Electron. Comput. EC-330-334 (1959)
+  pages: 5
+
+  'The "must-have" reference is the Volder one, it seems to be the original work.'
+  According to "References on CORDIC Methods", https://www.taygeta.com/cordic_refs.html
+
+  Volder, J.E., 1959; The CORDIC Trigonometric Computing Technique, IRE Transactions on
+  Electronic Computers, V. EC-8, No. 3, pp. 330-334
+
+  http://www.jacques-laporte.org/Volder_CORDIC.pdf
