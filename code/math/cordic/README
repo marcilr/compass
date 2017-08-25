@@ -39,6 +39,9 @@ cordic_refs.html
   with CORDIC methods, but is probably impossible to find.  Cowan & Grant have a
   section of a chapter on CORDIC methods illustrating several kinds of CORDIC calculations
 
+  Volder, J.E., 1959; The CORDIC Trigonometric Computing Technique, IRE Transactions on
+    Electronic Computers, V. EC-8, No. 3, pp. 330-334
+
   https://www.taygeta.com/cordic_refs.html
 
 cordic_tut.html
