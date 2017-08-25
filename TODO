@@ -3,9 +3,40 @@ Created Sat Aug 19 08:39:28 AKDT 2017
 Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
 
 
-+++ Sat Aug 19 08:39:28 AKDT 2017 - Working on migrating repo to github.
-  I/O Routines:
-    file:///home/marcilr/git/projects/compass/code/io/index.html
++++ Thu Aug 24 16:27:54 AKDT 2017 - Found out about:
+    (IJACSA) International Journal of Advanced Computer Science and Applications
 
-  Graphics Routines - Drawing the Needle
-    file:///home/marcilr/git/projects/compass/code/graphics/needledraw.html
+    compass/code/math/cordic/pdf/README:46
+
++++ Sat Aug 19 08:39:28 AKDT 2017 - Working on migrating repo to github.
+    I/O Routines:
+      file:///home/marcilr/git/projects/compass/code/io/index.html
+
+    Graphics Routines - Drawing the Needle
+      file:///home/marcilr/git/projects/compass/code/graphics/needledraw.html
+
+
+Complete
+========
+x Thu Aug 24 15:58:18 AKDT 2017 - Tracked down the "must-have" reference.
+  A copy of Volder's The CORDIC Trigonometric Computing Technique online at:
+    http://www.jacques-laporte.org/Volder_CORDIC.pdf
+
+  Saved to:
+    compass/code/math/cordic/pdf/Volder_CORDIC.pdf
+
+  Cool reference in:
+
+  cordic_refs.html
+    References on CORDIC Methods
+
+    The "must-have" reference is the Volder one, it seems to be the original work.
+    The Zoran Corporation technical note talks about magnitude and phase computation
+    with CORDIC methods, but is probably impossible to find.  Cowan & Grant have a
+    section of a chapter on CORDIC methods illustrating several kinds of CORDIC calculations
+
+    Volder, J.E., 1959; The CORDIC Trigonometric Computing Technique, IRE Transactions on
+      Electronic Computers, V. EC-8, No. 3, pp. 330-334
+
+    https://www.taygeta.com/cordic_refs.html
+
