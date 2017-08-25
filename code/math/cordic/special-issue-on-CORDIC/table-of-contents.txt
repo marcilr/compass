@@ -1,0 +1,190 @@
+table-of-contents.txt
+Created Thu Aug 24 19:26:42 AKDT 2017
+Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
+
+
+Journal of VLSI Signal Processing Systems - special issue on CORDIC
+Volume 25 Issue 2, June 2000
+Kluwer Academic Publishers Hingham, MA, USA 
+ISSN:0922-5773
+
+
+Chairmen:	Jeong-A Lee	Chosun Univ., Kwang-Ju City, Korea
+Editors:	S. Y. Kung	Princeton Univ., Princeton, NJ
+Gerben Hekstra	Philips Research, Eindhoven, Netherlands
+Ed Deprettere	Leiden Univ., Leiden, Netherlands
+
+
+Table of Contents
+=================
+Guest Editor's Introduction
+Gerben Hekstra, Ed Deprettere, Jeong-A Lee
+Pages: 99-100
+doi>10.1023/A:1008129720516
+
+Guest Editor's Introduction
+Gerben Hekstra, Ed Deprettere, Jeong-A Lee
+Pages: 99-100
+doi>10.1023/A:1008129720516
+
+
+The Birth of Cordic
+-------------------
+Jack E. Volder
+Pages: 101-105
+doi>10.1023/A:1008110704586
+
+The very earliest history of the CORDIC computing technique--a highly efficient method to
+compute elementary functions--is presented.  The CORDIC technique was born out of necessity,
+the incentive being the replacement of the analog navigation computer of the B-58 aircraft
+by a high accuracy, high-performance digital computer.  The revolutionary development of the
+CORDIC technique is presented, along with details of the very first implementations: the
+CORDIC I prototype and the CORDIC II airborne digital navigation computer.
+
+
+
+The Story of Unified Cordic
+---------------------------
+John Stephen Walther
+Pages: 107-112
+doi>10.1023/A:1008162721424
+
+The story is told of how the Unified Cordic algorithm came to be developed, starting from
+an idea in the mind of a student and culminating in a product, a patent, a paper, a motorcade,
+and an award.  Along the way, a unified algorithm for generating the elementary functions and
+the math co-processor industry in Silicon Valley were born.
+
+
+
+Evaluation of Fast Rotation Methods
+-----------------------------------
+Gerben Hekstra
+Pages: 113-124
+doi>10.1023/A:1008114805495
+Full text available:  Publisher SitePublisher Site
+
+In this paper, we present a comprehensive inventory and evaluation of fast rotation methods.
+Fast rotations are arithmetic methods for performing orthonormal rotation at a very low cost
+in implementation. We show that there are different implementation forms for fast rotations,
+and propose a classification for them.  We compare fast rotation methods with a direct form
+and with a factored form implementation, and examine the trade-offs that existbetween the
+angle of rotation, the accuracy in scaling, and the cost of performing the rotation.
+
+
+A Floating Point Vectoring Algorithm Based on Fast Rotations
+------------------------------------------------------------
+K. J. Van Der Kolk, J. A. Lee, E. F. A. Deprettere
+Pages: 125-139
+doi>10.1023/A:1008166822333
+Full text available:  Publisher SitePublisher Site
+
+The idea of approximate rotations has been introduced by J. Gotze and G. Hekstra.
+G. Hekstra and E. Deprettere extended the concept to orthogonal fast rotations and formalized
+the concept by providing a fast rotation theory.  In this theory, the emphasis has been on 
+fast rotation, whereas fast rotation-based vectorization has only been considered in an
+approximating sense in examples published by J. Gotze and G. Hekstra.  The formalization of
+fast rotation-based vectorization is the subject of this paper.  The few known approximate
+fast vectorization algorithms are special cases of the generic fast rotation-based vectorization
+algorithm proposed in this paper.
+
+
+
+Very-High Radix CORDIC Rotation Based on Selection by Rounding
+--------------------------------------------------------------
+Elisardo Antelo, Tomomas Lang, Javier D. Bruguera
+Pages: 141-153
+doi>10.1023/A:1008119006403
+Full text available:  Publisher SitePublisher Site
+
+A very-high radix algorithm and implementation for CORDIC rotation in circular and hyperbolic
+coordinates is presented. The selection function consists of rounding the residual.  It is
+shown that this assures convergence from the second iteration on.   For the first iteration,
+the selection is done by table, using a lower radix than for the remaining iterations.  The
+compensation of the variable scale factor is done by computing the logarithm of the scale factor
+and performing the compensation by an exponential.  Estimations of the delay for 32-bit and
+64-bit precision show a substantial speed up when compared to low radix implementations.
+The proposed algorithm is also compared with previously proposed very-high radix ones, and
+significant advantages are identified.
+
+
+
+Redundant Constant-Factor Implementation of Multi-Dimensional CORDIC andIts Application to Complex SVD
+------------------------------------------------------------------------------------------------------
+Shen-Fu Hsiao, Chun-Yi Lau, Jean-Marc Delosme
+Pages: 155-166
+doi>10.1023/A:1008171023241
+Full text available:  Publisher SitePublisher Site
+
+Redundant Implementations of Multi-dimensional CORDIC algorithms are presented where the carry-ripple
+additions are replaced by carry-free signed-digit additions.  Both folded (iterative) and unfolded
+(pipelined) architectures are considered in the redundant implementation.  Furthermore, the scaling
+iterations are merged with the unscaled CORDIC iterations in the folded CORDIC architecture in order
+to reduce the overall computation time of one CORDIC operation.  The redundant multidimensional
+CORDIC is then applied to the singular value decomposition of complex matrices, with either a folded
+or an on-line architecture.  The resulting processing speed is higher than with alternative approaches
+based on 2-D CORDIC.
+
+
+
+High-Speed CORDIC Based on an Overlapped Architecture and
+  a Novel <o with right dash on top>-Prediction Method
+---------------------------------------------------------
+Jae-Hyuck Kwak, Jae Hun Choi, Earl E. Swartzlander, Jr.
+Pages: 167-177
+doi>10.1023/A:1008123124150
+
+This paper presents architectural and algorithmic approaches for achieving high-speed CORDIC
+processing in both of the two operating modes: vectoring and rotation. For vectoring mode CORDIC
+processing, a modified architecture is proposed, which aims at reduction of computation time by
+overlapping the stages for redundant addition and selection of rotation direction.  In addition,
+a novel rotation direction prediction scheme for rotation mode CORDIC is presented.  The method is
+based on approximation of the binary angle input to a number with the arctangent weights
+(tan 1 2 i).  The implementation is designed to keep the fast timing characteristics of redundant
+arithmetic in the x/y path of the CORDIC processing.  The characteristics are analyzed with respect
+to latency time and area, and compared with those obtained by conventional COtation time.  Thus,
+they achieve higher throughput in pipelining.ues reduce not only the block latency but also the
+overall computation time. Thus, they achieve higher throughput in pipelining.
+
+
+
+
+A Radix-10 BKM Algorithm for Computing Transcendentals on Pocket Computers
+--------------------------------------------------------------------------
+L. Imbert, J. M. Muller, F. Rico
+Pages: 179-186
+doi>10.1023/A:1008127208220
+Full text available:  Publisher SitePublisher Site
+
+We present a radix-10 variant of the BKM algorithm.  It is ashift-and-add, CORDIC-like algorithm
+that allows fast computation of complex exponentials and logarithms.  It can easily be used to
+compute the classical real elementary functions (sin, cos, arctan, ln, exp).  This radix-10 version
+is suitable for implementationin a pocket computer.
+
+
+
+Numerical Accuracy of Fast Fourier Transforms with CORDIC Arithmetic
+--------------------------------------------------------------------
+M. Bekooij, J. Huisken, K. Nowak
+Pages: 187-193
+doi>10.1023/A:1008179225059
+Full text available:  Publisher SitePublisher Site
+
+The vector rotation operation in the butterfly of a Fast Fourier Transform (FFT) can be calculated
+by a complex multiplier as well as a CORDIC (COordinate Rotation DIgital Computer).  For these vector
+rotation blocks, expressions for the maximum numerical error are derived.  It is shown that the error
+introduced by the CORDIC can be reduced by increasing the size of the input vector of the CORDIC and
+decreasing the size of the output vector by the same amount.  This input vector scaling makes the
+reduction possible of the number of bits in the data path of the CORDIC.  The impact on the Signal
+to Noise Ratio (SNR) of the FFT is evaluated when a CORDIC is applied in the FFT butterfly.
+
+
+--dl.acm.org/citation.cfm?id=352135&picked=prox&cfid=801516755&cftoken=98161854
+
+
+
+Links
+=====
+Journal of VLSI Signal Processing Systems - special issue on CORDIC
+Volume 25 Issue 2, June 2000
+Table of Contents
+http://dl.acm.org/citation.cfm?id=352135&picked=prox&cfid=801516755&cftoken=98161854
