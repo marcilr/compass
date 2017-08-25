@@ -5,6 +5,29 @@ Copyright (C) 2017 by Raymond E. Marcil <marcilr@gmail.com>
 
 Filelist
 ========
+7113f1c94a9ce24f45d136d81d69da24b598.pdf
+  The Birth of CORDIC
+  JACK E. VOLDER
+  Journal of VLSI Signal Processing 25, 101-105, 2000
+  (C) Kluwer Academic Publishers. Manufactured in The Netherlands.
+  Abstract. The very earliest history of the CORDIC computing technique - a highly efficient
+  method to compute elementary functions - is presented.  The CORDIC technique was born out
+  of necessity, the incentive being the replacement of the analog navigation computer of the
+  B-58 aircraft by a high accuracy, high-performance digital computer.  The revolutionary
+  development of the CORDIC technique is presented, along with details of the very first
+  implementations: the CORDIC I prototype and the CORDIC II airborne digital navigation
+  computer.
+
+  Jack Volder Jack volder served an a B-24 flight engineer during World War II.  After his
+  discharge, he enrolled in Texas Technological College where he received his Bachelor of
+  Science degree in Electrical Engineering in 1949...
+
+  Great biography of Jack E. Volder
+
+  pages: 5
+
+  https://pdfs.semanticscholar.org/e897/7113f1c94a9ce24f45d136d81d69da24b598.pdf
+
 97asap.pdf
   Efficient Implementation of Rotation Operations
   for High Performance QRD-RLS Filtering
